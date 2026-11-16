@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useStore } from "@/lib/disiplin/store";
 import { parentApi } from "@/lib/disiplin/api";
 import {
@@ -79,6 +80,18 @@ export function PublicHome() {
     <main className="mx-auto max-w-6xl px-4 py-8 sm:py-12 space-y-10">
       {/* Hero */}
       <section className="text-center space-y-4">
+        <div className="flex justify-center">
+          <span className="grid size-24 sm:size-28 place-items-center rounded-full bg-white shadow-lg ring-2 ring-primary/20 overflow-hidden">
+            <Image
+              src="/logo-mtaf.png"
+              alt="Logo Madrasah Tahfiz Al Furqan"
+              width={92}
+              height={92}
+              className="object-contain"
+              priority
+            />
+          </span>
+        </div>
         <p className="text-sm uppercase tracking-[0.2em] text-primary font-medium">
           Assalamualaikum
         </p>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useStore } from "@/lib/disiplin/store";
 import { staffApi } from "@/lib/disiplin/api";
 import { Button } from "@/components/ui/button";
@@ -62,7 +63,18 @@ export function StaffLogin() {
 
       <Card className="glass-card border-0">
         <CardContent className="p-6 space-y-5">
-          <div className="text-center space-y-1">
+          <div className="text-center space-y-3">
+            <div className="flex justify-center">
+              <span className="grid size-16 place-items-center rounded-full bg-white shadow-md ring-1 ring-primary/20 overflow-hidden">
+                <Image
+                  src="/logo-mtaf.png"
+                  alt="Logo Madrasah Tahfiz Al Furqan"
+                  width={58}
+                  height={58}
+                  className="object-contain"
+                />
+              </span>
+            </div>
             <h1 className="text-2xl font-bold">Log Masuk Staf</h1>
             <p className="text-sm text-muted-foreground">
               Panel HEM, Guru dan Pentadbir.

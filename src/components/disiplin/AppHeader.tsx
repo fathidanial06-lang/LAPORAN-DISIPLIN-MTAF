@@ -1,12 +1,12 @@
 "use client";
 
-import { Moon, BookOpen, ShieldCheck, LogIn } from "lucide-react";
+import Image from "next/image";
+import { BookOpen, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useStore } from "@/lib/disiplin/store";
 
 export function AppHeader() {
   const mode = useStore((s) => s.mode);
-  const setMode = useStore((s) => s.setMode);
   const goStaffLogin = useStore((s) => s.goStaffLogin);
   const goPublicHome = useStore((s) => s.goPublicHome);
 
@@ -18,11 +18,18 @@ export function AppHeader() {
           className="flex items-center gap-3 text-left"
           aria-label="Laman utama portal"
         >
-          <span className="grid size-10 place-items-center rounded-full bg-primary text-primary-foreground shadow-sm">
-            <Moon className="size-5" />
+          <span className="grid size-12 place-items-center rounded-full bg-white shadow-sm ring-1 ring-primary/20 overflow-hidden shrink-0">
+            <Image
+              src="/logo-mtaf.png"
+              alt="Logo Madrasah Tahfiz Al Furqan"
+              width={44}
+              height={44}
+              className="object-contain"
+              priority
+            />
           </span>
           <span className="hidden sm:flex flex-col leading-tight">
-            <span className="font-semibold text-base">
+            <span className="font-semibold text-base text-primary">
               Madrasah Tahfiz Al Furqan
             </span>
             <span className="text-xs text-muted-foreground">
@@ -59,8 +66,4 @@ export function AppHeader() {
       <div className="ornament-line h-px w-full" aria-hidden="true" />
     </header>
   );
-}
-
-export function HeaderLogoShield() {
-  return <ShieldCheck className="size-4" />;
 }

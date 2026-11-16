@@ -16,6 +16,10 @@ export const metadata: Metadata = {
     "Merit Demerit",
   ],
   authors: [{ name: "Unit HEM, Madrasah Tahfiz Al Furqan" }],
+  icons: {
+    icon: "/logo-mtaf.png",
+    apple: "/logo-mtaf.png",
+  },
 };
 
 export default function RootLayout({

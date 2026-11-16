@@ -1,12 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { useStore } from "@/lib/disiplin/store";
 import { Button } from "@/components/ui/button";
 import { Users, ShieldCheck } from "lucide-react";
 
 export function AppFooter() {
   const mode = useStore((s) => s.mode);
-  const setMode = useStore((s) => s.setMode);
   const goStaffLogin = useStore((s) => s.goStaffLogin);
   const goPublicHome = useStore((s) => s.goPublicHome);
 
@@ -14,6 +14,13 @@ export function AppFooter() {
     <footer className="mt-auto w-full">
       <div className="ornament-line h-px w-full" aria-hidden="true" />
       <div className="mx-auto max-w-6xl px-4 py-5 flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+        <Image
+          src="/logo-mtaf.png"
+          alt="Logo Madrasah Tahfiz Al Furqan"
+          width={40}
+          height={40}
+          className="size-10 object-contain shrink-0 hidden sm:block"
+        />
         <div className="text-sm text-muted-foreground">
           <p className="font-medium text-foreground">
             © 2026 Madrasah Tahfiz Al Furqan · Unit Hal Ehwal Murid
