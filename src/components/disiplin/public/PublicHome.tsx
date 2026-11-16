@@ -79,23 +79,23 @@ export function PublicHome() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-8 sm:py-12 space-y-10">
       {/* Hero */}
-      <section className="text-center space-y-4">
+      <section className="text-center space-y-5">
         <div className="flex justify-center">
-          <span className="grid size-24 sm:size-28 place-items-center rounded-full bg-white shadow-lg ring-2 ring-primary/20 overflow-hidden">
+          <span className="grid size-36 sm:size-44 place-items-center rounded-full bg-white/95 shadow-xl overflow-hidden logo-ring">
             <Image
               src="/logo-mtaf.png"
               alt="Logo Madrasah Tahfiz Al Furqan"
-              width={92}
-              height={92}
-              className="object-contain"
+              width={140}
+              height={140}
+              className="object-contain p-1.5 sm:p-2"
               priority
             />
           </span>
         </div>
-        <p className="text-sm uppercase tracking-[0.2em] text-primary font-medium">
+        <p className="text-sm uppercase tracking-[0.2em] text-gold-gradient font-semibold">
           Assalamualaikum
         </p>
-        <h1 className="text-3xl sm:text-4xl font-bold text-balance">
+        <h1 className="text-3xl sm:text-5xl font-bold text-balance text-foreground">
           Cari Laporan Anak Anda
         </h1>
         <p className="max-w-2xl mx-auto text-muted-foreground text-base sm:text-lg">
@@ -146,9 +146,9 @@ export function PublicHome() {
               <span
                 className={
                   isIC
-                    ? "text-emerald-600"
+                    ? "text-emerald-400"
                     : isName
-                    ? "text-amber-600"
+                    ? "text-amber-400"
                     : ""
                 }
               >

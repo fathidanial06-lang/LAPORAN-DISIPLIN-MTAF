@@ -56,13 +56,13 @@ export function AttendanceDetail({ kedatangan }: AttendanceDetailProps) {
             <h3 className="font-semibold mb-3">Ringkasan Kedatangan</h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
               <Stat label="Hari Sekolah" value={stats.hariSekolah} />
-              <Stat label="Hadir" value={stats.hadir} tone="text-emerald-600" />
-              <Stat label="Lewat" value={stats.lewat} tone="text-amber-600" />
+              <Stat label="Hadir" value={stats.hadir} tone="text-emerald-400" />
+              <Stat label="Lewat" value={stats.lewat} tone="text-amber-400" />
               <Stat label="Peratus" value={`${stats.peratus}%`} tone="text-emerald-700" />
-              <Stat label="Sakit/MC" value={stats.sakit} tone="text-sky-600" />
-              <Stat label="Kebenaran" value={stats.kebenaran} tone="text-indigo-500" />
-              <Stat label="Tanpa Sebab" value={stats.tanpaSebab} tone="text-orange-600" />
-              <Stat label="Pulang Awal" value={stats.pulangAwal} tone="text-purple-500" />
+              <Stat label="Sakit/MC" value={stats.sakit} tone="text-sky-400" />
+              <Stat label="Kebenaran" value={stats.kebenaran} tone="text-indigo-400" />
+              <Stat label="Tanpa Sebab" value={stats.tanpaSebab} tone="text-orange-400" />
+              <Stat label="Pulang Awal" value={stats.pulangAwal} tone="text-purple-400" />
             </div>
           </CardContent>
         </Card>

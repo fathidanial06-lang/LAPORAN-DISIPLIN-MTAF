@@ -17,9 +17,9 @@ export function AppFooter() {
         <Image
           src="/logo-mtaf.png"
           alt="Logo Madrasah Tahfiz Al Furqan"
-          width={40}
-          height={40}
-          className="size-10 object-contain shrink-0 hidden sm:block"
+          width={48}
+          height={48}
+          className="size-12 object-contain shrink-0 hidden sm:block"
         />
         <div className="text-sm text-muted-foreground">
           <p className="font-medium text-foreground">

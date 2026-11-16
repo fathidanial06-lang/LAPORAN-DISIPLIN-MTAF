@@ -60,8 +60,8 @@ export function StatCard({
 }) {
   const toneClasses: Record<string, string> = {
     default: "text-foreground",
-    good: "text-emerald-600",
-    warn: "text-amber-600",
+    good: "text-emerald-400",
+    warn: "text-amber-400",
     danger: "text-red-600",
   };
   return (

@@ -18,18 +18,18 @@ export function AppHeader() {
           className="flex items-center gap-3 text-left"
           aria-label="Laman utama portal"
         >
-          <span className="grid size-12 place-items-center rounded-full bg-white shadow-sm ring-1 ring-primary/20 overflow-hidden shrink-0">
+          <span className="grid size-16 place-items-center rounded-full bg-white/95 shadow-md overflow-hidden shrink-0 logo-ring">
             <Image
               src="/logo-mtaf.png"
               alt="Logo Madrasah Tahfiz Al Furqan"
-              width={44}
-              height={44}
-              className="object-contain"
+              width={60}
+              height={60}
+              className="object-contain p-0.5"
               priority
             />
           </span>
           <span className="hidden sm:flex flex-col leading-tight">
-            <span className="font-semibold text-base text-primary">
+            <span className="font-semibold text-lg text-gold-gradient">
               Madrasah Tahfiz Al Furqan
             </span>
             <span className="text-xs text-muted-foreground">

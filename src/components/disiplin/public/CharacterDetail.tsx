@@ -118,7 +118,7 @@ export function CharacterDetail({ sahsiah }: { sahsiah: any }) {
             {compare && (
               <div className="flex items-center gap-2 text-sm">
                 {compare.dir === "up" && (
-                  <ArrowUp className="size-4 text-emerald-600" />
+                  <ArrowUp className="size-4 text-emerald-400" />
                 )}
                 {compare.dir === "down" && (
                   <ArrowDown className="size-4 text-red-600" />
