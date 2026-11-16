@@ -1,17 +1,12 @@
 // Prisma schema for "Laporan Disiplin Murid" - Madrasah Tahfiz Al Furqan
-// Real backend database. All data is rekaan (dummy).
-//
-// For local development: SQLite (file:./db/custom.db) — already seeded.
-// For production (Vercel + Supabase): change provider to "postgresql" and
-// set DATABASE_URL to the Supabase Connection Pooler URL.
-// See README.md and supabase_setup.sql for Supabase setup instructions.
+// Real production database: Supabase PostgreSQL
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
