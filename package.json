@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -H 0.0.0.0 -p 3000 2>&1 | tee dev.log",
-    "build": "next build && cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/",
+    "build": "next build && cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/ && cp supabase_setup.sql .next/standalone/",
     "start": "NODE_ENV=production bun .next/standalone/server.js",
     "lint": "eslint .",
     "postinstall": "prisma generate",

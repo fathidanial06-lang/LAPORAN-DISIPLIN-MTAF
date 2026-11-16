@@ -39,14 +39,28 @@ export default function Home() {
     useStore.persist.rehydrate();
   }, []);
 
-  // Load global config once.
+  // Load global config once — auto-initializes database if tables missing.
   useEffect(() => {
-    parentApi
-      .get<AppConfig>("/api/config")
-      .then((c) => setConfig(c))
-      .catch(() => {
-        // ignore — UI will fall back to defaults
-      });
+    let cancelled = false;
+    (async () => {
+      try {
+        const c = await parentApi.get<AppConfig>("/api/config");
+        if (!cancelled) setConfig(c);
+      } catch {
+        // Config failed — database might not be set up yet.
+        // Auto-run setup to create tables + seed data, then retry.
+        try {
+          await fetch("/api/setup", { method: "POST" });
+          const c = await parentApi.get<AppConfig>("/api/config");
+          if (!cancelled) setConfig(c);
+        } catch {
+          // Setup also failed — ignore, UI falls back to defaults
+        }
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
   }, [setConfig]);
 
   // If staff has token but view state got out of sync, route into dashboard.
