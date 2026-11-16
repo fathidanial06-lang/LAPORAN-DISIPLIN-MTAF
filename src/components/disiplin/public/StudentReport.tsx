@@ -225,16 +225,17 @@ export function StudentReport() {
         </div>
       )}
 
-      {/* Status cards */}
+      {/* Status cards — bento grid */}
       {loading ? (
-        <div className="grid gap-4 sm:grid-cols-3">
-          <Skeleton className="h-40 rounded-2xl" />
-          <Skeleton className="h-40 rounded-2xl" />
-          <Skeleton className="h-40 rounded-2xl" />
+        <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[120px] gap-4">
+          <Skeleton className="col-span-2 md:col-span-2 row-span-2 rounded-2xl" />
+          <Skeleton className="col-span-1 md:col-span-1 row-span-2 rounded-2xl" />
+          <Skeleton className="col-span-1 md:col-span-1 row-span-2 rounded-2xl" />
         </div>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[120px] gap-4">
           <StatusCard
+            className="col-span-2 md:col-span-2 row-span-2"
             icon={CalendarCheck}
             title="Kedatangan"
             metric={
@@ -242,8 +243,10 @@ export function StudentReport() {
             }
             detail={kedatangan?.stats ? kedatanganNarration(kedatangan.stats) : "Tiada rekod kedatangan."}
             color={kedatanganColor(kedatangan?.stats?.status)}
+            big
           />
           <StatusCard
+            className="col-span-1 md:col-span-1 row-span-2"
             icon={Star}
             title="Sahsiah"
             metric={sahsiah?.grade ? `Gred ${sahsiah.grade.gred}` : "—"}
@@ -251,6 +254,7 @@ export function StudentReport() {
             color={sahsiahColor(sahsiah?.grade?.gred)}
           />
           <StatusCard
+            className="col-span-1 md:col-span-1 row-span-2"
             icon={Scale}
             title="Merit & Demerit"
             metric={

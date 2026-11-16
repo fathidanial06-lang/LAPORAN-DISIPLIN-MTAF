@@ -10,6 +10,8 @@ export interface StatusCardProps {
   metric: string;
   detail: string;
   color: string; // hex / semantic accent
+  className?: string;
+  big?: boolean;
 }
 
 export function StatusCard({
@@ -18,21 +20,25 @@ export function StatusCard({
   metric,
   detail,
   color,
+  className = "",
+  big = false,
 }: StatusCardProps) {
   return (
-    <Card className={cn("glass-card overflow-hidden border-0 p-0")}>
+    <Card className={cn("glass-card overflow-hidden border-0 p-0", className)}>
       <div
         className="h-1.5 w-full"
         style={{ backgroundColor: color }}
         aria-hidden="true"
       />
-      <CardContent className="p-5 space-y-3">
+      <CardContent className="p-5 h-full flex flex-col justify-between gap-3">
         <div className="flex items-center gap-3">
           <span
-            className="grid size-12 place-items-center rounded-xl neu-inset shrink-0"
+            className={`grid place-items-center rounded-2xl neu-inset shrink-0 ${
+              big ? "size-14" : "size-11"
+            }`}
             aria-hidden="true"
           >
-            <Icon className="size-5" style={{ color }} />
+            <Icon className={big ? "size-6" : "size-5"} style={{ color }} />
           </span>
           <div>
             <p className="text-xs uppercase tracking-wide text-muted-foreground">
@@ -40,7 +46,10 @@ export function StatusCard({
             </p>
           </div>
         </div>
-        <p className="text-3xl font-bold" style={{ color }}>
+        <p
+          className={`${big ? "text-4xl sm:text-5xl" : "text-3xl"} font-bold leading-none`}
+          style={{ color }}
+        >
           {metric}
         </p>
         <p className="text-sm text-foreground/90 leading-relaxed">{detail}</p>
