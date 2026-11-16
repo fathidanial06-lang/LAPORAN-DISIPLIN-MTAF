@@ -44,85 +44,105 @@
 }
 
 :root {
-  --radius: 0.875rem;
+  --radius: 1rem;
 
-  /* MTAF premium palette — deep navy blue + gold + turquoise (from school logo) */
-  --background: oklch(0.2 0.045 255);
-  --foreground: oklch(0.96 0.012 240);
+  /* ============================================================
+     NEUMORPHISM palette — soft turquoise (logo base) + yellow accent
+     The background IS the surface: cards/inputs share the same tone
+     and get depth from dual light/dark shadows (extruded / inset).
+     ============================================================ */
 
-  --card: oklch(0.26 0.05 255 / 0.55);
-  --card-foreground: oklch(0.96 0.012 240);
+  /* Base surface — soft turquoise/cyan matching the school logo */
+  --neu-bg: oklch(0.88 0.07 200);
+  --neu-bg-soft: oklch(0.9 0.06 200);
+  --neu-light: rgba(255, 255, 255, 0.95);
+  --neu-dark: rgba(15, 75, 95, 0.45);
+  --neu-light-sm: rgba(255, 255, 255, 0.75);
+  --neu-dark-sm: rgba(15, 75, 95, 0.3);
 
-  --popover: oklch(0.24 0.05 255);
-  --popover-foreground: oklch(0.96 0.012 240);
+  --background: var(--neu-bg);
+  --foreground: oklch(0.22 0.05 210);
 
-  /* Primary: premium gold (from logo yellow) */
-  --primary: oklch(0.82 0.15 88);
-  --primary-foreground: oklch(0.18 0.05 255);
+  --card: var(--neu-bg);
+  --card-foreground: oklch(0.22 0.05 210);
 
-  --secondary: oklch(0.3 0.045 255);
-  --secondary-foreground: oklch(0.96 0.012 240);
+  --popover: var(--neu-bg-soft);
+  --popover-foreground: oklch(0.22 0.05 210);
 
-  --muted: oklch(0.27 0.04 255);
-  --muted-foreground: oklch(0.8 0.02 240);
+  /* Primary: deep amber-gold (from logo yellow, darkened for contrast on turquoise) */
+  --primary: oklch(0.7 0.16 70);
+  --primary-foreground: oklch(0.18 0.04 250);
 
-  /* Accent: turquoise (from logo) */
-  --accent: oklch(0.72 0.13 200);
-  --accent-foreground: oklch(0.15 0.04 255);
+  --secondary: var(--neu-bg-soft);
+  --secondary-foreground: oklch(0.25 0.05 210);
 
-  --destructive: oklch(0.65 0.22 25);
-  --border: oklch(0.5 0.05 255 / 0.45);
-  --input: oklch(0.34 0.045 255 / 0.75);
-  --ring: oklch(0.82 0.15 88);
+  --muted: var(--neu-bg-soft);
+  --muted-foreground: oklch(0.45 0.05 210);
 
-  --chart-1: oklch(0.72 0.13 200);
-  --chart-2: oklch(0.82 0.15 88);
-  --chart-3: oklch(0.65 0.16 250);
-  --chart-4: oklch(0.7 0.18 40);
-  --chart-5: oklch(0.6 0.2 20);
+  /* Accent: deeper turquoise from logo */
+  --accent: oklch(0.62 0.13 200);
+  --accent-foreground: oklch(0.99 0.01 200);
 
-  --sidebar: oklch(0.22 0.045 255 / 0.6);
-  --sidebar-foreground: oklch(0.96 0.012 240);
-  --sidebar-primary: oklch(0.82 0.15 88);
-  --sidebar-primary-foreground: oklch(0.18 0.05 255);
-  --sidebar-accent: oklch(0.3 0.05 255);
-  --sidebar-accent-foreground: oklch(0.96 0.012 240);
-  --sidebar-border: oklch(0.45 0.05 255 / 0.4);
-  --sidebar-ring: oklch(0.82 0.15 88);
+  --destructive: oklch(0.58 0.22 27);
+  --border: transparent;
+  --input: var(--neu-bg);
+  --ring: oklch(0.62 0.13 200);
 
-  /* Custom premium navy background with gold + turquoise glows */
-  --disiplin-bg-from: oklch(0.16 0.05 258);
-  --disiplin-bg-via: oklch(0.24 0.06 230);
-  --disiplin-bg-to: oklch(0.2 0.05 200);
-  --disiplin-glow-gold: oklch(0.82 0.15 88 / 0.18);
-  --disiplin-glow-teal: oklch(0.72 0.13 200 / 0.16);
+  --chart-1: oklch(0.62 0.13 200);
+  --chart-2: oklch(0.82 0.16 92);
+  --chart-3: oklch(0.7 0.12 220);
+  --chart-4: oklch(0.6 0.16 40);
+  --chart-5: oklch(0.55 0.2 20);
+
+  --sidebar: var(--neu-bg);
+  --sidebar-foreground: oklch(0.22 0.05 210);
+  --sidebar-primary: oklch(0.62 0.13 200);
+  --sidebar-primary-foreground: oklch(0.99 0.01 200);
+  --sidebar-accent: var(--neu-bg-soft);
+  --sidebar-accent-foreground: oklch(0.25 0.05 210);
+  --sidebar-border: transparent;
+  --sidebar-ring: oklch(0.62 0.13 200);
+
+  /* Subtle background glow (yellow + turquoise from logo) */
+  --disiplin-bg-from: oklch(0.9 0.07 200);
+  --disiplin-bg-via: oklch(0.88 0.08 195);
+  --disiplin-bg-to: oklch(0.89 0.07 210);
+  --disiplin-glow-gold: oklch(0.88 0.15 92 / 0.16);
+  --disiplin-glow-teal: oklch(0.6 0.13 200 / 0.12);
 }
 
 .dark {
-  /* Premium navy stays consistent — dark variant uses slightly deeper navy */
-  --background: oklch(0.17 0.05 258);
-  --foreground: oklch(0.96 0.012 240);
-  --card: oklch(0.23 0.05 255 / 0.6);
-  --card-foreground: oklch(0.96 0.012 240);
-  --popover: oklch(0.22 0.05 255);
-  --popover-foreground: oklch(0.96 0.012 240);
-  --primary: oklch(0.84 0.16 88);
-  --primary-foreground: oklch(0.17 0.05 258);
-  --secondary: oklch(0.28 0.045 255);
-  --secondary-foreground: oklch(0.96 0.012 240);
-  --muted: oklch(0.25 0.04 255);
-  --muted-foreground: oklch(0.72 0.02 240);
-  --accent: oklch(0.74 0.14 200);
-  --accent-foreground: oklch(0.15 0.04 255);
+  /* Neumorphism on a deep teal-navy for dark mode */
+  --neu-bg: oklch(0.26 0.05 210);
+  --neu-bg-soft: oklch(0.28 0.05 210);
+  --neu-light: rgba(140, 200, 215, 0.18);
+  --neu-dark: rgba(0, 10, 25, 0.55);
+  --neu-light-sm: rgba(140, 200, 215, 0.12);
+  --neu-dark-sm: rgba(0, 10, 25, 0.3);
+
+  --background: var(--neu-bg);
+  --foreground: oklch(0.95 0.02 200);
+  --card: var(--neu-bg);
+  --card-foreground: oklch(0.95 0.02 200);
+  --popover: var(--neu-bg-soft);
+  --popover-foreground: oklch(0.95 0.02 200);
+  --primary: oklch(0.84 0.16 92);
+  --primary-foreground: oklch(0.2 0.05 250);
+  --secondary: var(--neu-bg-soft);
+  --secondary-foreground: oklch(0.95 0.02 200);
+  --muted: var(--neu-bg-soft);
+  --muted-foreground: oklch(0.72 0.03 200);
+  --accent: oklch(0.7 0.13 200);
+  --accent-foreground: oklch(0.12 0.04 210);
   --destructive: oklch(0.68 0.2 25);
-  --border: oklch(0.45 0.05 255 / 0.45);
-  --input: oklch(0.3 0.045 255 / 0.7);
-  --ring: oklch(0.84 0.16 88);
-  --sidebar: oklch(0.2 0.045 255 / 0.65);
-  --sidebar-foreground: oklch(0.96 0.012 240);
-  --disiplin-bg-from: oklch(0.14 0.055 260);
-  --disiplin-bg-via: oklch(0.22 0.06 230);
-  --disiplin-bg-to: oklch(0.18 0.05 200);
+  --border: transparent;
+  --input: var(--neu-bg);
+  --ring: oklch(0.7 0.13 200);
+  --sidebar: var(--neu-bg);
+  --sidebar-foreground: oklch(0.95 0.02 200);
+  --disiplin-bg-from: oklch(0.24 0.05 210);
+  --disiplin-bg-via: oklch(0.26 0.055 195);
+  --disiplin-bg-to: oklch(0.25 0.05 220);
 }
 
 @layer base {
@@ -131,93 +151,247 @@
   }
   body {
     @apply bg-background text-foreground;
+    /* soften default focus rings to fit neu aesthetic */
+  }
+  /* Inputs / textareas / selects become inset (pressed) neu surfaces */
+  input,
+  textarea,
+  select,
+  [role="combobox"] {
+    background: var(--input) !important;
+    border: 1px solid transparent !important;
+    box-shadow:
+      inset 4px 4px 9px var(--neu-dark-sm),
+      inset -4px -4px 9px var(--neu-light-sm) !important;
+  }
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    box-shadow:
+      inset 4px 4px 9px var(--neu-dark-sm),
+      inset -4px -4px 9px var(--neu-light-sm),
+      0 0 0 2px oklch(0.62 0.13 200 / 0.5) !important;
+    outline: none !important;
+  }
+  /* Buttons get a raised neu surface by default (shadcn Button uses variants) */
+  button {
+    border-color: transparent;
+  }
+  /* shadcn Button (data-slot="button") — neumorphic variants */
+  [data-slot="button"] {
+    border: 1px solid transparent;
+    transition: box-shadow 0.18s ease, background 0.18s ease, color 0.18s ease, transform 0.06s ease;
+  }
+  /* Primary (gold) — solid deep gold with soft raised shadow */
+  [data-slot="button"].bg-primary {
+    box-shadow:
+      5px 5px 12px rgba(110, 75, 5, 0.4),
+      -5px -5px 12px var(--neu-light);
+  }
+  [data-slot="button"].bg-primary:hover {
+    box-shadow:
+      4px 4px 10px rgba(120, 90, 10, 0.24),
+      -4px -4px 10px var(--neu-light);
+  }
+  [data-slot="button"].bg-primary:active {
+    box-shadow:
+      inset 3px 3px 7px rgba(120, 90, 10, 0.3),
+      inset -3px -3px 7px rgba(255, 255, 255, 0.4);
+    transform: translateY(1px);
+  }
+  /* Outline / secondary — raised neu surface (note: default buttons also carry
+     `outline-none` for a11y, so we target the actual bg utility classes only) */
+  [data-slot="button"].bg-background,
+  [data-slot="button"].bg-secondary {
+    background: var(--neu-bg) !important;
+    box-shadow:
+      5px 5px 11px var(--neu-dark-sm),
+      -5px -5px 11px var(--neu-light-sm);
+  }
+  [data-slot="button"].bg-background:hover,
+  [data-slot="button"].bg-secondary:hover {
+    box-shadow:
+      4px 4px 9px var(--neu-dark-sm),
+      -4px -4px 9px var(--neu-light-sm);
+  }
+  [data-slot="button"].bg-background:active,
+  [data-slot="button"].bg-secondary:active {
+    box-shadow:
+      inset 3px 3px 7px var(--neu-dark-sm),
+      inset -3px -3px 7px var(--neu-light-sm);
+  }
+  /* Ghost stays flat (no shadow) */
+  /* Destructive — solid with soft shadow */
+  [data-slot="button"].bg-destructive {
+    box-shadow:
+      5px 5px 12px rgba(120, 20, 10, 0.28),
+      -5px -5px 12px var(--neu-light);
+  }
+
+  /* Cards — neumorphic raised by default (override shadcn shadow-sm + border) */
+  [data-slot="card"] {
+    background: var(--neu-bg) !important;
+    border: 1px solid transparent !important;
+    box-shadow:
+      7px 7px 16px var(--neu-dark),
+      -7px -7px 16px var(--neu-light) !important;
+  }
+  /* When .glass / .glass-card / .glass-strong applied, keep their shadows */
+  [data-slot="card"].glass,
+  [data-slot="card"].glass-card,
+  [data-slot="card"].glass-strong {
+    background: var(--neu-bg) !important;
+    border: 1px solid transparent !important;
+  }
+
+  /* Tabs — triggers are raised by default, active = inset */
+  [data-slot="tabs-trigger"] {
+    background: var(--neu-bg) !important;
+    border: 1px solid transparent !important;
+    box-shadow:
+      4px 4px 9px var(--neu-dark-sm),
+      -4px -4px 9px var(--neu-light-sm) !important;
+    color: var(--muted-foreground);
+  }
+  [data-slot="tabs-trigger"]:hover {
+    box-shadow:
+      3px 3px 7px var(--neu-dark-sm),
+      -3px -3px 7px var(--neu-light-sm) !important;
+  }
+  [data-slot="tabs-trigger"][data-state="active"] {
+    background: var(--neu-bg) !important;
+    color: var(--accent);
+    box-shadow:
+      inset 3px 3px 7px var(--neu-dark-sm),
+      inset -3px -3px 7px var(--neu-light-sm) !important;
+  }
+  [data-slot="tabs-list"] {
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    box-shadow: none !important;
+  }
+
+  /* Badges — keep flat (semantic colored pills) so they pop against neu surface */
+  [data-slot="badge"] {
+    border: 1px solid transparent !important;
+    box-shadow: none !important;
   }
 }
 
 @layer utilities {
-  /* Premium navy background with gold + turquoise radial glows */
+  /* Background: soft turquoise with gentle logo-colored glows */
   .bg-disiplin-bg {
     background-image:
-      radial-gradient(1100px 620px at 8% -8%, var(--disiplin-glow-gold), transparent 55%),
-      radial-gradient(900px 560px at 100% 6%, var(--disiplin-glow-teal), transparent 55%),
-      radial-gradient(1400px 800px at 50% 110%, var(--disiplin-bg-via), transparent 60%),
+      radial-gradient(1100px 620px at 6% -6%, var(--disiplin-glow-gold), transparent 55%),
+      radial-gradient(900px 560px at 100% 4%, var(--disiplin-glow-teal), transparent 55%),
       linear-gradient(180deg, var(--disiplin-bg-from), var(--background));
     background-attachment: fixed;
   }
 
-  /* Premium glassmorphism on navy: frosted light overlay with gold-tinted border */
+  /* ===== Neumorphism surfaces ===== */
+
+  /* Raised (extruded) — default cards */
   .glass {
-    background: rgba(255, 255, 255, 0.07);
-    backdrop-filter: blur(18px) saturate(160%);
-    -webkit-backdrop-filter: blur(18px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: var(--neu-bg);
+    backdrop-filter: none;
+    border: 1px solid transparent;
     box-shadow:
-      0 10px 36px -10px rgba(0, 8, 30, 0.55),
-      0 1px 0 0 rgba(255, 255, 255, 0.08),
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+      8px 8px 18px var(--neu-dark),
+      -8px -8px 18px var(--neu-light);
   }
   .dark .glass {
-    background: rgba(20, 40, 80, 0.45);
-    border: 1px solid rgba(140, 200, 255, 0.16);
     box-shadow:
-      0 12px 40px -12px rgba(0, 0, 0, 0.65),
-      inset 0 1px 0 0 rgba(200, 220, 255, 0.1);
-  }
-  .glass-strong {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(22px) saturate(180%);
-    -webkit-backdrop-filter: blur(22px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow:
-      0 14px 48px -12px rgba(0, 8, 30, 0.65),
-      0 1px 0 0 rgba(255, 255, 255, 0.1),
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.16);
-  }
-  .dark .glass-strong {
-    background: rgba(20, 40, 80, 0.6);
-    border: 1px solid rgba(140, 200, 255, 0.22);
-  }
-  .glass-card {
-    @apply rounded-2xl;
-    background: rgba(255, 255, 255, 0.07);
-    backdrop-filter: blur(18px) saturate(160%);
-    -webkit-backdrop-filter: blur(18px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    box-shadow:
-      0 10px 36px -10px rgba(0, 8, 30, 0.55),
-      0 1px 0 0 rgba(255, 255, 255, 0.08),
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
-  }
-  .dark .glass-card {
-    background: rgba(20, 40, 80, 0.45);
-    border: 1px solid rgba(140, 200, 255, 0.16);
-    box-shadow:
-      0 12px 40px -12px rgba(0, 0, 0, 0.65),
-      inset 0 1px 0 0 rgba(200, 220, 255, 0.1);
+      8px 8px 18px var(--neu-dark),
+      -8px -8px 18px var(--neu-light);
   }
 
-  /* Premium gold gradient text for emphasis */
+  /* Strong raised — header / prominent cards */
+  .glass-strong {
+    background: var(--neu-bg-soft);
+    backdrop-filter: none;
+    border: 1px solid transparent;
+    box-shadow:
+      10px 10px 22px var(--neu-dark),
+      -10px -10px 22px var(--neu-light);
+  }
+  .dark .glass-strong {
+    box-shadow:
+      10px 10px 22px var(--neu-dark),
+      -10px -10px 22px var(--neu-light);
+  }
+
+  /* Card variant — slightly smaller shadow for content cards */
+  .glass-card {
+    @apply rounded-2xl;
+    background: var(--neu-bg);
+    backdrop-filter: none;
+    border: 1px solid transparent;
+    box-shadow:
+      7px 7px 16px var(--neu-dark),
+      -7px -7px 16px var(--neu-light);
+  }
+  .dark .glass-card {
+    box-shadow:
+      7px 7px 16px var(--neu-dark),
+      -7px -7px 16px var(--neu-light);
+  }
+
+  /* Inset (pressed) — for chips, active tabs, pressed buttons, status pills */
+  .neu-inset {
+    background: var(--neu-bg);
+    border: 1px solid transparent;
+    box-shadow:
+      inset 4px 4px 9px var(--neu-dark-sm),
+      inset -4px -4px 9px var(--neu-light-sm);
+  }
+  .dark .neu-inset {
+    box-shadow:
+      inset 4px 4px 9px var(--neu-dark-sm),
+      inset -4px -4px 9px var(--neu-light-sm);
+  }
+
+  /* Raised small — buttons */
+  .neu-raised {
+    background: var(--neu-bg);
+    border: 1px solid transparent;
+    box-shadow:
+      5px 5px 11px var(--neu-dark-sm),
+      -5px -5px 11px var(--neu-light-sm);
+    transition: box-shadow 0.18s ease, color 0.18s ease;
+  }
+  .neu-raised:hover {
+    box-shadow:
+      4px 4px 9px var(--neu-dark-sm),
+      -4px -4px 9px var(--neu-light-sm);
+  }
+  .neu-raised:active {
+    box-shadow:
+      inset 3px 3px 7px var(--neu-dark-sm),
+      inset -3px -3px 7px var(--neu-light-sm);
+  }
+
+  /* Premium gold gradient text — deeper amber for contrast on turquoise */
   .text-gold-gradient {
-    background: linear-gradient(135deg, oklch(0.88 0.16 92), oklch(0.78 0.14 75));
+    background: linear-gradient(135deg, oklch(0.62 0.16 65), oklch(0.5 0.14 55));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
-  /* Premium gold ring around logos */
+  /* Logo badge — soft raised neu circle (replaces gold ring) */
   .logo-ring {
     box-shadow:
-      0 0 0 2px oklch(0.82 0.15 88 / 0.55),
-      0 0 0 6px rgba(255, 255, 255, 0.06),
-      0 10px 30px -8px oklch(0.82 0.15 88 / 0.35);
+      6px 6px 14px var(--neu-dark),
+      -6px -6px 14px var(--neu-light),
+      inset 0 0 0 2px rgba(255, 255, 255, 0.4);
   }
 
-  /* Subtle premium divider (gold) */
+  /* Subtle divider */
   .ornament-line {
     background-image: linear-gradient(
       90deg,
       transparent,
-      oklch(0.82 0.15 88 / 0.55),
+      oklch(0.62 0.13 200 / 0.35),
       transparent
     );
   }

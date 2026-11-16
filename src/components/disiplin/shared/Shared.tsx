@@ -60,13 +60,13 @@ export function StatCard({
 }) {
   const toneClasses: Record<string, string> = {
     default: "text-foreground",
-    good: "text-emerald-400",
-    warn: "text-amber-400",
+    good: "text-emerald-700",
+    warn: "text-amber-700",
     danger: "text-red-600",
   };
   return (
     <div className="glass rounded-2xl p-4 flex items-start gap-3">
-      <div className="rounded-xl bg-primary/10 p-2.5 text-primary shrink-0">
+      <div className="rounded-xl neu-inset p-2.5 text-accent shrink-0">
         <Icon className="size-5" />
       </div>
       <div className="min-w-0 flex-1">

@@ -256,7 +256,7 @@ export function RecordMerit() {
                   {selectedCat.tahap}
                 </span>
                 {isBerat && (
-                  <span className="text-amber-400 text-xs">
+                  <span className="text-amber-700 text-xs">
                     Menunggu kelulusan HEM.
                   </span>
                 )}

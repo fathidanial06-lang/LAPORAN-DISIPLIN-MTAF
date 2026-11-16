@@ -74,10 +74,10 @@ export function StaffShell({ children }: { children: React.ReactNode }) {
               setStaffView(it.id);
               setOpen(false);
             }}
-            className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors min-h-11 ${
+            className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all min-h-11 ${
               active
-                ? "bg-primary text-primary-foreground shadow-sm"
-                : "hover:bg-muted text-foreground"
+                ? "neu-inset text-accent"
+                : "neu-raised text-foreground"
             }`}
             aria-current={active ? "page" : undefined}
           >
@@ -92,7 +92,7 @@ export function StaffShell({ children }: { children: React.ReactNode }) {
           logoutStaff();
           goPublicHome();
         }}
-        className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium hover:bg-muted text-foreground min-h-11"
+        className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium neu-raised text-foreground min-h-11"
       >
         <LogOut className="size-4 shrink-0" /> Log Keluar
       </button>

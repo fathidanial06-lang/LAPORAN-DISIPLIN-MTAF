@@ -9,7 +9,7 @@ export interface StatusCardProps {
   title: string;
   metric: string;
   detail: string;
-  color: string; // hex
+  color: string; // hex / semantic accent
 }
 
 export function StatusCard({
@@ -20,10 +20,7 @@ export function StatusCard({
   color,
 }: StatusCardProps) {
   return (
-    <Card
-      className={cn("glass-card overflow-hidden border-0 p-0")}
-      style={{ boxShadow: `0 10px 30px -12px ${color}66` }}
-    >
+    <Card className={cn("glass-card overflow-hidden border-0 p-0")}>
       <div
         className="h-1.5 w-full"
         style={{ backgroundColor: color }}
@@ -32,10 +29,10 @@ export function StatusCard({
       <CardContent className="p-5 space-y-3">
         <div className="flex items-center gap-3">
           <span
-            className="grid size-11 place-items-center rounded-xl text-white shrink-0"
-            style={{ backgroundColor: color }}
+            className="grid size-12 place-items-center rounded-xl neu-inset shrink-0"
+            aria-hidden="true"
           >
-            <Icon className="size-5" />
+            <Icon className="size-5" style={{ color }} />
           </span>
           <div>
             <p className="text-xs uppercase tracking-wide text-muted-foreground">

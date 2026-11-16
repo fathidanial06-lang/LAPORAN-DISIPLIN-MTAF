@@ -47,7 +47,7 @@ export function MeritDetail({ merit }: { merit: any }) {
               <p className="text-xs uppercase tracking-wide text-muted-foreground">
                 Merit
               </p>
-              <p className="text-2xl font-semibold text-emerald-400">
+              <p className="text-2xl font-semibold text-emerald-700">
                 +{totals.merit}
               </p>
             </div>

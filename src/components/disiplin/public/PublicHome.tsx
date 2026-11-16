@@ -146,9 +146,9 @@ export function PublicHome() {
               <span
                 className={
                   isIC
-                    ? "text-emerald-400"
+                    ? "text-emerald-700"
                     : isName
-                    ? "text-amber-400"
+                    ? "text-amber-700"
                     : ""
                 }
               >
@@ -223,7 +223,7 @@ function ModuleCard({
   return (
     <Card className="glass-card border-0">
       <CardContent className="p-5 space-y-3">
-        <div className="grid size-11 place-items-center rounded-xl bg-primary/10 text-primary">
+        <div className="grid size-12 place-items-center rounded-xl neu-inset text-accent">
           <Icon className="size-5" />
         </div>
         <h3 className="font-semibold text-lg">{title}</h3>
