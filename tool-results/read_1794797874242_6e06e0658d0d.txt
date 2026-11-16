@@ -1,0 +1,1390 @@
+     1→[Logo Madrasah Tahfiz Al Furqan]
+     2→
+     3→DOKUMEN KEPERLUAN PRODUK (PRD)
+     4→
+     5→Laporan Disiplin Murid
+     6→
+     7→Kedatangan | Sahsiah | Merit & Demerit
+     8→
+     9→UNIT HAL EHWAL MURID (HEM)
+    10→
+    11→Madrasah Tahfiz Al Furqan, Malaysia
+    12→
+    13→Versi 1.0 (Draf) • 16 November 2026
+    14→
+    15→Teknologi: React • Pangkalan Data Dummy • z.ai (GLM 5.2)
+    16→
+    17→Kandungan
+    18→
+    19→1. Maklumat Dokumen
+    20→
+    21→2. Ringkasan Eksekutif
+    22→
+    23→3. Latar Belakang dan Pernyataan Masalah
+    24→
+    25→4. Objektif dan Ukuran Kejayaan
+    26→
+    27→5. Skop Projek
+    28→
+    29→6. Pengguna dan Peranan
+    30→
+    31→7. Keperluan Fungsian
+    32→
+    33→8. Cerita Pengguna (User Stories)
+    34→
+    35→9. Peraturan Perniagaan (Merit, Demerit dan Tahap Disiplin)
+    36→
+    37→10. Keperluan Bukan Fungsian
+    38→
+    39→11. Reka Bentuk Pengalaman Pengguna (UX)
+    40→
+    41→12. Seni Bina Teknikal
+    42→
+    43→13. Model Data dan Pangkalan Data Dummy
+    44→
+    45→14. Spesifikasi API Tiruan (Mock API)
+    46→
+    47→15. Privasi, Keselamatan dan Pematuhan PDPA
+    48→
+    49→16. Pelan Pembangunan dan Fasa
+    50→
+    51→17. Strategi Ujian dan Kriteria Penerimaan
+    52→
+    53→18. Risiko dan Mitigasi
+    54→
+    55→Lampiran A: Prompt Pembangunan untuk z.ai (GLM 5.2)
+    56→
+    57→Lampiran B: Data Sampel Dummy
+    58→
+    59→Lampiran C: Glosari
+    60→
+    61→1. Maklumat Dokumen
+    62→
+    63→  -------------------- --------------------------------------------------
+    64→  Nama Produk          Laporan Disiplin Murid (nama kod: "Portal Disiplin
+    65→                       Al Furqan")
+    66→
+    67→  Pemilik Produk       Unit HEM, Madrasah Tahfiz Al Furqan
+    68→
+    69→  Pengguna Sasaran     Ibu bapa/penjaga, guru, warden, penyelaras HEM dan
+    70→                       pentadbir madrasah
+    71→
+    72→  Status               Draf 1.0 – fasa prototaip dengan data dummy
+    73→
+    74→  Platform             Aplikasi web responsif (mobile-first), dibina
+    75→                       dengan React
+    76→
+    77→  Alat Pembangunan     z.ai menggunakan model GLM 5.2
+    78→
+    79→  Bahasa Antara Muka   Bahasa Malaysia (utama); sokongan Bahasa Inggeris
+    80→                       dicadangkan pada fasa kemudian
+    81→
+    82→  Catatan              Semua data dalam dokumen ini adalah rekaan. Nilai
+    83→                       merit/demerit dan ambang tindakan adalah cadangan
+    84→                       permulaan dan perlu disahkan oleh pihak
+    85→                       pentadbiran madrasah.
+    86→  -------------------- --------------------------------------------------
+    87→
+    88→2. Ringkasan Eksekutif
+    89→
+    90→Laporan Disiplin Murid ialah portal web yang membolehkan ibu bapa
+    91→menyemak laporan disiplin anak mereka dengan mudah tanpa perlu
+    92→menghubungi guru atau menunggu laporan bercetak. Ibu bapa hanya perlu
+    93→memasukkan No. Kad Pengenalan (IC) atau nama murid dan sistem akan
+    94→memaparkan tiga perkara utama: kedatangan, sahsiah dan merit/demerit.
+    95→
+    96→Pada fasa pertama, sistem dibangunkan sebagai prototaip menggunakan
+    97→React dengan pangkalan data dummy (fail JSON dan penyimpanan pelayar)
+    98→supaya reka bentuk, aliran dan paparan boleh diuji bersama ibu bapa dan
+    99→guru sebelum disambungkan kepada pangkalan data sebenar. Pembangunan
+   100→dilakukan melalui z.ai (GLM 5.2), dan dokumen ini turut menyediakan
+   101→prompt yang boleh digunakan terus (Lampiran A).
+   102→
+   103→Cadangan penting: carian menggunakan IC sahaja berisiko mendedahkan
+   104→maklumat kanak-kanak kepada orang yang tidak berkaitan. Oleh itu PRD ini
+   105→mencadangkan langkah pengesahan ringan (contohnya 4 digit terakhir IC
+   106→penjaga atau PIN) yang boleh dihidupkan atau dimatikan oleh pentadbir
+   107→(lihat Bahagian 15).
+   108→
+   109→3. Latar Belakang dan Pernyataan Masalah
+   110→
+   111→3.1 Latar Belakang
+   112→
+   113→Madrasah tahfiz menekankan hafazan Al-Quran serta pembentukan akhlak.
+   114→Maklumat kedatangan, sahsiah dan tatatertib murid biasanya direkod
+   115→secara manual (buku log, borang kertas atau hamparan Excel) oleh guru,
+   116→warden dan Unit HEM. Maklumat ini kemudian disampaikan kepada ibu bapa
+   117→melalui laporan berkala, mesej WhatsApp atau pertemuan.
+   118→
+   119→3.2 Masalah Semasa
+   120→
+   121→  -----------------------------------------------------------------------
+   122→  Masalah                           Kesan
+   123→  --------------------------------- -------------------------------------
+   124→  Maklumat tersebar di banyak       Sukar merumuskan rekod menyeluruh
+   125→  tempat (buku, Excel, WhatsApp)    seorang murid
+   126→
+   127→  Ibu bapa hanya mengetahui masalah Tindakan pembetulan lewat dan
+   128→  disiplin lewat                    hubungan rumah-madrasah lemah
+   129→
+   130→  Laporan sukar difahami (angka dan Salah faham tentang status disiplin
+   131→  singkatan tanpa penjelasan)       anak
+   132→
+   133→  Tiada akses sendiri untuk ibu     Beban kerja guru menjawab pertanyaan
+   134→  bapa                              berulang
+   135→
+   136→  Pengiraan merit/demerit manual    Risiko kesilapan dan
+   137→                                    ketidakkonsistenan
+   138→  -----------------------------------------------------------------------
+   139→
+   140→4. Objektif dan Ukuran Kejayaan
+   141→
+   142→4.1 Objektif
+   143→
+   144→-   Menyediakan satu portal rasmi yang mudah difahami dan diakses ibu
+   145→    bapa melalui telefon pintar.
+   146→
+   147→-   Memaparkan kedatangan, sahsiah dan merit/demerit murid dalam satu
+   148→    paparan ringkas dengan bahasa mudah.
+   149→
+   150→-   Membolehkan guru dan Unit HEM merekod dan mengemas kini data dengan
+   151→    pantas.
+   152→
+   153→-   Mengautomasikan pengiraan jumlah merit, demerit dan tahap disiplin.
+   154→
+   155→-   Membina prototaip berfungsi dengan data dummy untuk pengesahan reka
+   156→    bentuk sebelum pelaksanaan penuh.
+   157→
+   158→4.2 Ukuran Kejayaan (KPI)
+   159→
+   160→  ------------------------------------------------------------------------
+   161→  KPI                           Sasaran              Cara Pengukuran
+   162→  ----------------------------- -------------------- ---------------------
+   163→  Masa untuk ibu bapa mendapat  Kurang daripada 30   Ujian kebolehgunaan
+   164→  laporan                       saat                 
+   165→
+   166→  Kadar kejayaan ibu bapa       90% ke atas          UAT bersama 10 ibu
+   167→  menemui laporan tanpa bantuan                      bapa
+   168→
+   169→  Skor kefahaman laporan (soal  Purata 4.0 ke atas   Soal selidik selepas
+   170→  selidik 1–5)                                       UAT
+   171→
+   172→  Pengurangan pertanyaan manual 50% dalam 3 bulan    Log pertanyaan Unit
+   173→  kepada guru                   (fasa produksi)      HEM
+   174→
+   175→  Masa memuatkan halaman        Kurang daripada 3    Lighthouse /
+   176→  laporan (rangkaian 4G)        saat                 pemantauan
+   177→
+   178→  Kemas kini rekod harian oleh  Kurang daripada 2    Pemerhatian guru
+   179→  guru                          minit bagi satu      
+   180→                                kelas                
+   181→  ------------------------------------------------------------------------
+   182→
+   183→5. Skop Projek
+   184→
+   185→5.1 Dalam Skop (Fasa 1 – Prototaip)
+   186→
+   187→-   Portal ibu bapa: carian IC atau nama, paparan ringkasan dan butiran
+   188→    tiga modul.
+   189→
+   190→-   Modul Kedatangan: rekod harian, kalendar bulanan, kadar kehadiran
+   191→    dan sebab tidak hadir.
+   192→
+   193→-   Modul Sahsiah: penilaian berkala (akhlak, ibadah, kebersihan,
+   194→    tanggungjawab, hubungan sosial) dan catatan guru.
+   195→
+   196→-   Modul Merit dan Demerit: senarai kesalahan/pencapaian, mata, jumlah
+   197→    bersih dan tahap disiplin.
+   198→
+   199→-   Panel guru/HEM: log masuk, tambah/ubah rekod dan senarai murid.
+   200→
+   201→-   Panel pentadbir: urus murid, kategori merit/demerit, tetapan ambang
+   202→    dan pengesahan.
+   203→
+   204→-   Pangkalan data dummy (JSON + localStorage) dengan 60 murid dalam 5
+   205→    kelas (Tahfiz 1 hingga Tahfiz 5).
+   206→
+   207→-   Muat turun/cetak laporan ringkas (PDF melalui fungsi cetak pelayar).
+   208→
+   209→5.2 Luar Skop (Fasa 1)
+   210→
+   211→-   Pangkalan data produksi dan hosting sebenar.
+   212→
+   213→-   Integrasi dengan sistem kerajaan atau sistem pengurusan sekolah
+   214→    lain.
+   215→
+   216→-   Penghantaran notifikasi automatik (WhatsApp/SMS/e-mel) – dicadangkan
+   217→    Fasa 3.
+   218→
+   219→-   Modul hafazan, akademik, yuran dan asrama.
+   220→
+   221→-   Aplikasi mudah alih asli (iOS/Android); PWA boleh dipertimbangkan
+   222→    kemudian.
+   223→
+   224→6. Pengguna dan Peranan
+   225→
+   226→  ----------------------------------------------------------------------------
+   227→  Peranan             Penerangan                  Keperluan Utama
+   228→  ------------------- --------------------------- ----------------------------
+   229→  Ibu bapa/Penjaga    Pengguna utama. Tahap       Cari anak dengan mudah;
+   230→                      literasi digital pelbagai;  faham status disiplin; tiada
+   231→                      majoriti menggunakan        log masuk rumit.
+   232→                      telefon pintar.             
+   233→
+   234→  Guru/Ustaz/Warden   Merekod kedatangan, sahsiah Input pantas, sokongan
+   235→                      dan merit/demerit.          telefon/tablet, elak
+   236→                                                  kesilapan.
+   237→
+   238→  Penyelaras HEM      Menyelia semua rekod,       Paparan keseluruhan,
+   239→                      meluluskan demerit berat,   penapis, laporan, kawalan
+   240→                      menjana laporan.            kualiti data.
+   241→
+   242→  Pentadbir/Mudir     Mengurus pengguna, tetapan  Konfigurasi, audit,
+   243→                      sistem dan dasar.           keselamatan.
+   244→  ----------------------------------------------------------------------------
+   245→
+   246→6.1 Persona Contoh
+   247→
+   248→Puan Aminah (42 tahun), ibu kepada murid tahun 3. Menggunakan telefon
+   249→Android dan WhatsApp setiap hari, kurang biasa dengan sistem dalam
+   250→talian. Mahu tahu sama ada anaknya hadir ke kelas dan berkelakuan baik
+   251→tanpa perlu menelefon ustaz. Memerlukan paparan besar, bahasa mudah dan
+   252→warna yang jelas.
+   253→
+   254→Ustaz Faiz (30 tahun), guru HEM. Mencatat kedatangan setiap pagi dan
+   255→kesalahan disiplin sepanjang hari. Mahu memasukkan data dalam beberapa
+   256→ketukan sahaja menggunakan telefon.
+   257→
+   258→7. Keperluan Fungsian
+   259→
+   260→Keutamaan: M = Mesti ada (Must), S = Patut ada (Should), C = Boleh ada
+   261→(Could).
+   262→
+   263→7.1 Portal Ibu Bapa (Akses Awam)
+   264→
+   265→  ---------------------------------------------------------------------------
+   266→  ID      Keperluan                                                Prioriti
+   267→  ------- -------------------------------------------------------- ----------
+   268→  FR-01   Halaman utama dengan satu kotak carian besar: "Masukkan  M
+   269→          No. IC atau Nama Murid".                                 
+   270→
+   271→  FR-02   Carian IC: menerima format 12 digit dengan atau tanpa    M
+   272→          sengkang (cth. 120514-10-0123 atau 120514100123); sistem 
+   273→          menormalkan input.                                       
+   274→
+   275→  FR-03   Carian nama: sokongan carian separa dan tidak sensitif   M
+   276→          huruf besar/kecil. Jika lebih daripada satu padanan,     
+   277→          hanya paparkan nama dengan IC bertopeng (cth.            
+   278→          120514--*3); ibu bapa mesti memasukkan IC penuh untuk    
+   279→          membuka laporan.                                         
+   280→
+   281→  FR-04   Pengesahan ringan (boleh dihidupkan/dimatikan): 4 digit  S
+   282→          terakhir IC penjaga atau PIN sebelum laporan dipaparkan. 
+   283→
+   284→  FR-05   Mesej ralat mesra apabila murid tidak ditemui, dengan    M
+   285→          panduan semula dan hubungan Unit HEM.                    
+   286→
+   287→  FR-06   Halaman Ringkasan Murid: nama, kelas (Tahfiz 1–5),       M
+   288→          tahun, foto pilihan, dan tiga kad status (Kedatangan,    
+   289→          Sahsiah, Merit/Demerit) berkod warna hijau/kuning/merah  
+   290→          dengan ikon dan teks.                                    
+   291→
+   292→  FR-07   Tab atau kad boleh kembang untuk butiran setiap modul.   M
+   293→
+   294→  FR-08   Penapis tempoh: bulan ini, penggal ini, tahun ini dan    S
+   295→          julat tarikh tersuai.                                    
+   296→
+   297→  FR-09   Penjelasan ringkas ("Apa maksud ini?") bagi setiap       M
+   298→          istilah dan tahap disiplin.                              
+   299→
+   300→  FR-10   Butang cetak/simpan PDF untuk laporan murid.             S
+   301→
+   302→  FR-11   Had cubaan carian (rate limit) dan CAPTCHA ringkas       S
+   303→          selepas beberapa cubaan gagal.                           
+   304→
+   305→  FR-12   Pilihan bahasa Melayu/Inggeris.                          C
+   306→  ---------------------------------------------------------------------------
+   307→
+   308→7.2 Modul Kedatangan
+   309→
+   310→  ---------------------------------------------------------------------------
+   311→  ID      Keperluan                                                Prioriti
+   312→  ------- -------------------------------------------------------- ----------
+   313→  FR-20   Status harian: Hadir, Lewat, Tidak Hadir (Sakit/MC),     M
+   314→          Tidak Hadir (Dengan Kebenaran), Tidak Hadir (Tanpa       
+   315→          Sebab), Pulang Awal.                                     
+   316→
+   317→  FR-21   Paparan kalendar bulanan berkod warna bagi setiap        M
+   318→          status.                                                  
+   319→
+   320→  FR-22   Pengiraan automatik: jumlah hari persekolahan, hari      M
+   321→          hadir, kadar kehadiran (%), bilangan lewat, bilangan     
+   322→          tidak hadir tanpa sebab.                                 
+   323→
+   324→  FR-23   Penunjuk status: Cemerlang (95% ke atas), Baik (90–94%), M
+   325→          Perlu Perhatian (80–89%), Kritikal (bawah 80%) – boleh   
+   326→          dikonfigurasi.                                           
+   327→
+   328→  FR-24   Rekod sebab dan catatan ringkas guru bagi setiap         S
+   329→          ketidakhadiran.                                          
+   330→
+   331→  FR-25   Carta trend kehadiran bulanan.                           S
+   332→
+   333→  FR-26   Guru merekod kedatangan satu kelas sekaligus (senarai    M
+   334→          semak, "Tanda semua hadir" dengan pengecualian).         
+   335→
+   336→  FR-27   Pengecualian hari cuti (cuti umum, cuti penggal) supaya  S
+   337→          tidak dikira.                                            
+   338→  ---------------------------------------------------------------------------
+   339→
+   340→7.3 Modul Sahsiah
+   341→
+   342→  ---------------------------------------------------------------------------
+   343→  ID      Keperluan                                                Prioriti
+   344→  ------- -------------------------------------------------------- ----------
+   345→  FR-30   Penilaian sahsiah berkala (bulanan atau mengikut         M
+   346→          penggal) pada skala 1–5 untuk aspek: Akhlak dan Adab,    
+   347→          Ibadah (solat berjemaah, zikir), Kebersihan Diri dan     
+   348→          Asrama, Tanggungjawab dan Disiplin Masa, Hubungan dengan 
+   349→          Rakan dan Guru.                                          
+   350→
+   351→  FR-31   Gred keseluruhan automatik: A (Cemerlang), B (Baik), C   M
+   352→          (Memuaskan), D (Perlu Bimbingan).                        
+   353→
+   354→  FR-32   Catatan guru dalam ayat ringkas dan positif (kekuatan    M
+   355→          dan cadangan penambahbaikan).                            
+   356→
+   357→  FR-33   Perbandingan dengan penilaian sebelumnya                 S
+   358→          (naik/turun/tetap) menggunakan anak panah dan teks.      
+   359→
+   360→  FR-34   Carta radar atau bar bagi lima aspek sahsiah.            S
+   361→
+   362→  FR-35   Pengesahan penilaian oleh Penyelaras HEM sebelum         S
+   363→          dipaparkan kepada ibu bapa.                              
+   364→  ---------------------------------------------------------------------------
+   365→
+   366→7.4 Modul Merit dan Demerit
+   367→
+   368→  ---------------------------------------------------------------------------
+   369→  ID      Keperluan                                                Prioriti
+   370→  ------- -------------------------------------------------------- ----------
+   371→  FR-40   Katalog kategori merit (cth. Membantu rakan, Hafazan     M
+   372→          cemerlang, Kebersihan terbaik) dan demerit (cth. Lewat   
+   373→          ke kelas, Tidak berpakaian kemas, Bergaduh) beserta mata 
+   374→          lalai.                                                   
+   375→
+   376→  FR-41   Setiap rekod mengandungi: tarikh, jenis (merit/demerit), M
+   377→          kategori, mata, penerangan, pencatat dan status          
+   378→          kelulusan.                                               
+   379→
+   380→  FR-42   Jumlah merit, jumlah demerit dan mata bersih dikira      M
+   381→          automatik.                                               
+   382→
+   383→  FR-43   Tahap disiplin dan tindakan susulan dipaparkan secara    M
+   384→          automatik mengikut ambang (Bahagian 9).                  
+   385→
+   386→  FR-44   Demerit tahap berat memerlukan kelulusan Penyelaras HEM  S
+   387→          sebelum dipaparkan kepada ibu bapa.                      
+   388→
+   389→  FR-45   Garis masa (timeline) rekod merit/demerit dengan penapis M
+   390→          jenis dan tempoh.                                        
+   391→
+   392→  FR-46   Rekod tindakan pembetulan (cth. nasihat, kaunseling,     S
+   393→          penebusan merit) bagi setiap demerit.                    
+   394→
+   395→  FR-47   Penebusan: demerit tertentu boleh dikurangkan melalui    C
+   396→          merit tambahan mengikut peraturan madrasah (boleh        
+   397→          dikonfigurasi).                                          
+   398→
+   399→  FR-48   Penetapan semula mata pada permulaan tahun/penggal       S
+   400→          baharu dengan arkib rekod lama.                          
+   401→  ---------------------------------------------------------------------------
+   402→
+   403→7.5 Panel Guru, HEM dan Pentadbir
+   404→
+   405→  ---------------------------------------------------------------------------
+   406→  ID      Keperluan                                                Prioriti
+   407→  ------- -------------------------------------------------------- ----------
+   408→  FR-50   Log masuk berasaskan peranan (Guru, HEM, Pentadbir)      M
+   409→          dengan nama pengguna dan kata laluan (dummy pada Fasa    
+   410→          1).                                                      
+   411→
+   412→  FR-51   Papan pemuka: statistik kehadiran hari ini, murid perlu  M
+   413→          perhatian, rekod demerit terkini.                        
+   414→
+   415→  FR-52   CRUD murid: tambah, ubah, nyahaktif; import melalui fail M
+   416→          CSV.                                                     
+   417→
+   418→  FR-53   Borang pantas tambah merit/demerit (pilih murid,         M
+   419→          kategori, simpan) yang dioptimumkan untuk telefon.       
+   420→
+   421→  FR-54   Urus kategori merit/demerit dan ambang tahap disiplin.   M
+   422→
+   423→  FR-55   Log audit: siapa mengubah apa dan bila.                  S
+   424→
+   425→  FR-56   Eksport laporan kelas atau keseluruhan ke CSV/PDF.       S
+   426→
+   427→  FR-57   Tetapan sistem: hidup/mati pengesahan ibu bapa, tempoh   S
+   428→          penggal, hari cuti.                                      
+   429→
+   430→  FR-58   Butang "Tetap semula data dummy" untuk tujuan            M
+   431→          demonstrasi.                                             
+   432→  ---------------------------------------------------------------------------
+   433→
+   434→8. Cerita Pengguna (User Stories)
+   435→
+   436→  -------------------------------------------------------------------------
+   437→  ID      Cerita Pengguna                 Kriteria Penerimaan
+   438→  ------- ------------------------------- ---------------------------------
+   439→  US-01   Sebagai ibu bapa, saya mahu     IC sah dipaparkan dalam kurang
+   440→          menaip IC anak saya supaya saya daripada 3 saat; IC tidak sah
+   441→          dapat melihat laporan           memaparkan mesej ralat yang
+   442→          disiplinnya dengan segera.      jelas.
+   443→
+   444→  US-02   Sebagai ibu bapa, saya mahu     Senarai padanan dipaparkan dengan
+   445→          mencari melalui nama kerana     IC bertopeng; saya perlu
+   446→          saya tidak ingat IC sepenuhnya. mengesahkan dengan IC penuh.
+   447→
+   448→  US-03   Sebagai ibu bapa, saya mahu     Peratusan, warna status dan teks
+   449→          melihat kadar kehadiran anak    penerangan dipaparkan di bahagian
+   450→          dalam satu pandangan.           atas halaman.
+   451→
+   452→  US-04   Sebagai ibu bapa, saya mahu     Setiap tahap mempunyai penjelasan
+   453→          faham maksud "demerit" dan      ringkas dan tindakan susulan
+   454→          tindakan yang akan diambil.     dalam Bahasa Malaysia mudah.
+   455→
+   456→  US-05   Sebagai guru, saya mahu menanda Satu kelas Tahfiz (12 murid)
+   457→          kedatangan satu kelas dengan    boleh direkod kurang daripada 2
+   458→          pantas.                         minit.
+   459→
+   460→  US-06   Sebagai guru, saya mahu         Pilih murid, kategori dan simpan;
+   461→          menambah demerit dengan         mata dikira automatik.
+   462→          beberapa ketukan.               
+   463→
+   464→  US-07   Sebagai Penyelaras HEM, saya    Rekod berstatus "Menunggu" tidak
+   465→          mahu meluluskan demerit berat   kelihatan pada portal ibu bapa.
+   466→          sebelum dilihat ibu bapa.       
+   467→
+   468→  US-08   Sebagai pentadbir, saya mahu    Perubahan ambang terpakai
+   469→          menukar nilai ambang tahap      serta-merta pada pengiraan tahap.
+   470→          disiplin tanpa mengubah kod.    
+   471→
+   472→  US-09   Sebagai pentadbir, saya mahu    Log audit memaparkan pengguna,
+   473→          melihat siapa yang mengubah     tindakan, masa dan nilai
+   474→          rekod.                          lama/baharu.
+   475→  -------------------------------------------------------------------------
+   476→
+   477→9. Peraturan Perniagaan (Merit, Demerit dan Tahap Disiplin)
+   478→
+   479→Nilai di bawah ialah cadangan permulaan untuk tujuan prototaip. Pihak
+   480→madrasah perlu mengesahkan atau menggantikannya dengan dasar rasmi.
+   481→Semua nilai mesti disimpan sebagai konfigurasi, bukan ditulis tetap
+   482→dalam kod.
+   483→
+   484→9.1 Contoh Kategori Merit
+   485→
+   486→  -----------------------------------------------------------------------
+   487→  Kategori          Contoh                                Mata
+   488→  ----------------- ------------------------------------- ---------------
+   489→  Akhlak            Membantu rakan/guru, jujur            +3 hingga +5
+   490→                    memulangkan barang hilang             
+   491→
+   492→  Ibadah            Imam solat, solat berjemaah konsisten +2 hingga +5
+   493→                    sebulan                               
+   494→
+   495→  Hafazan           Menamatkan target hafazan lebih awal  +5 hingga +10
+   496→
+   497→  Kebersihan        Asrama/bilik paling bersih mingguan   +2 hingga +3
+   498→
+   499→  Kepimpinan        Ketua kelas Tahfiz yang cemerlang,    +5 hingga +10
+   500→                    wakil madrasah                        
+   501→  -----------------------------------------------------------------------
+   502→
+   503→9.2 Contoh Kategori Demerit
+   504→
+   505→  -----------------------------------------------------------------------
+   506→  Tahap             Contoh Kesalahan                      Mata
+   507→  ----------------- ------------------------------------- ---------------
+   508→  Ringan            Lewat ke kelas/surau, pakaian tidak   -1 hingga -3
+   509→                    kemas, tidak membawa buku             
+   510→
+   511→  Sederhana         Tidak hadir tanpa sebab, meninggalkan -4 hingga -7
+   512→                    solat berjemaah tanpa alasan,         
+   513→                    bercakap kasar                        
+   514→
+   515→  Berat             Bergaduh, keluar kawasan tanpa        -8 hingga -15
+   516→                    kebenaran, merosakkan harta madrasah  
+   517→
+   518→  Sangat Berat      Pelanggaran serius yang dirujuk       -16 ke atas
+   519→                    kepada Mudir/Jawatankuasa Disiplin    
+   520→  -----------------------------------------------------------------------
+   521→
+   522→9.3 Pengiraan dan Tahap Disiplin
+   523→
+   524→Mata Bersih = Jumlah Merit − Jumlah Demerit (dalam penggal semasa).
+   525→Tahap Disiplin ditentukan oleh jumlah demerit terkumpul selepas
+   526→mengambil kira penebusan merit (jika diaktifkan):
+   527→
+   528→  ------------------------------------------------------------------------
+   529→  Tahap         Jumlah       Warna      Tindakan Dipaparkan kepada Ibu
+   530→                Demerit                 Bapa
+   531→  ------------- ------------ ---------- ----------------------------------
+   532→  Cemerlang     0 – 5        Hijau      Tahniah! Teruskan akhlak yang
+   533→                                        baik.
+   534→
+   535→  Baik          6 – 15       Hijau muda Rekod baik. Sedikit teguran lisan
+   536→                                        telah diberikan.
+   537→
+   538→  Perlu         16 – 30      Kuning     Amaran bertulis; ibu bapa dijemput
+   539→  Perhatian                             berbincang dengan guru/HEM.
+   540→
+   541→  Amaran Serius 31 – 50      Jingga     Panggilan ibu bapa dan sesi
+   542→                                        kaunseling; pelan pemantauan.
+   543→
+   544→  Kritikal      51 ke atas   Merah      Dirujuk kepada Mudir/Jawatankuasa
+   545→                                        Disiplin dan pertemuan wajib.
+   546→  ------------------------------------------------------------------------
+   547→
+   548→9.4 Peraturan Tambahan
+   549→
+   550→-   Rekod demerit Berat dan Sangat Berat berstatus "Menunggu Kelulusan"
+   551→    dan hanya dipaparkan kepada ibu bapa selepas diluluskan HEM.
+   552→
+   553→-   Rekod tidak boleh dipadam; pembetulan dilakukan melalui rekod
+   554→    pembatalan dengan sebab (untuk jejak audit).
+   555→
+   556→-   Setiap rekod mesti mengandungi tarikh, pencatat dan penerangan
+   557→    ringkas.
+   558→
+   559→-   Bahasa dalam paparan ibu bapa mestilah neutral, sopan dan membina;
+   560→    elakkan label menghukum.
+   561→
+   562→-   Mata ditetapkan semula pada permulaan tahun akademik; rekod lama
+   563→    diarkibkan dan masih boleh dilihat.
+   564→
+   565→10. Keperluan Bukan Fungsian
+   566→
+   567→  ---------------------------------------------------------------------------
+   568→  Kategori              Keperluan
+   569→  --------------------- -----------------------------------------------------
+   570→  Kebolehgunaan         Mobile-first; saiz fon asas sekurang-kurangnya 16px;
+   571→                        sasaran sentuh minimum 44px; bahasa mudah; maksimum 3
+   572→                        klik untuk mencapai butiran mana-mana modul.
+   573→
+   574→  Kebolehcapaian        Pematuhan WCAG 2.1 AA: nisbah kontras mencukupi,
+   575→                        status tidak bergantung pada warna sahaja (guna ikon
+   576→                        dan teks), navigasi papan kekunci, label ARIA.
+   577→
+   578→  Prestasi              Muatan pertama kurang daripada 3 saat pada 4G; saiz
+   579→                        bundle awal di bawah 300 KB (gzip) melalui
+   580→                        code-splitting dan lazy loading.
+   581→
+   582→  Keserasian            Chrome, Safari, Edge dan Firefox versi terkini;
+   583→                        Android 9 ke atas dan iOS 14 ke atas; skrin 360px
+   584→                        hingga desktop.
+   585→
+   586→  Kebolehpercayaan      Lapisan data diabstrakkan supaya penukaran daripada
+   587→                        dummy ke API sebenar tidak mengubah komponen UI.
+   588→
+   589→  Kebolehselenggaraan   Kod TypeScript (disyorkan), struktur modular,
+   590→                        ESLint/Prettier, ujian unit untuk logik pengiraan.
+   591→
+   592→  Keselamatan           Lihat Bahagian 15.
+   593→
+   594→  Pelokalan             Teks disimpan dalam fail terjemahan (i18n) dengan
+   595→                        Bahasa Malaysia sebagai lalai; format tarikh
+   596→                        DD/MM/YYYY; zon waktu Asia/Kuala_Lumpur.
+   597→  ---------------------------------------------------------------------------
+   598→
+   599→11. Reka Bentuk Pengalaman Pengguna (UX)
+   600→
+   601→11.1 Prinsip Reka Bentuk
+   602→
+   603→-   Mudah dahulu: satu tindakan utama pada skrin pertama (carian).
+   604→
+   605→-   Visual dan bahasa ringkas: kad besar, ikon, warna status dengan teks
+   606→    penerangan.
+   607→
+   608→-   Positif dan membina: menonjolkan merit dan kemajuan sebelum demerit.
+   609→
+   610→-   Mesra telefon: susun atur satu lajur, butang besar, jadual bertukar
+   611→    menjadi kad pada skrin kecil.
+   612→
+   613→-   Identiti Islamik yang sederhana: palet hijau dan putih,
+   614→    kaligrafi/ornamen halus, ucapan salam pada halaman utama.
+   615→
+   616→11.2 Peta Skrin
+   617→
+   618→  -------------------------------------------------------------------------------
+   619→  Skrin              Laluan (Route)               Kandungan Utama
+   620→  ------------------ ---------------------------- -------------------------------
+   621→  Halaman Utama      /                            Logo madrasah, ucapan salam,
+   622→                                                  kotak carian IC/nama,
+   623→                                                  penerangan ringkas, pautan
+   624→                                                  bantuan.
+   625→
+   626→  Hasil Carian       /cari                        Senarai padanan (nama + IC
+   627→                                                  bertopeng + kelas) jika lebih
+   628→                                                  daripada satu.
+   629→
+   630→  Pengesahan         /sahkan                      Input 4 digit akhir IC penjaga
+   631→                                                  atau PIN (jika diaktifkan).
+   632→
+   633→  Laporan Murid      /laporan/:id                 Ringkasan + tiga kad status +
+   634→                                                  penapis tempoh + butang cetak.
+   635→
+   636→  Butiran Kedatangan /laporan/:id/kedatangan      Kalendar, statistik, senarai
+   637→                                                  ketidakhadiran, carta.
+   638→
+   639→  Butiran Sahsiah    /laporan/:id/sahsiah         Skor lima aspek, gred, catatan
+   640→                                                  guru, perbandingan.
+   641→
+   642→  Butiran            /laporan/:id/merit-demerit   Mata bersih, tahap disiplin,
+   643→  Merit/Demerit                                   garis masa rekod, penjelasan
+   644→                                                  tindakan.
+   645→
+   646→  Log Masuk Staf     /staf/log-masuk              Nama pengguna dan kata laluan.
+   647→
+   648→  Papan Pemuka Staf  /staf                        Statistik, pintasan tindakan
+   649→                                                  pantas.
+   650→
+   651→  Urus Murid / Rekod /staf/murid, /staf/rekod,    Jadual, borang CRUD,
+   652→  / Tetapan          /staf/tetapan                konfigurasi.
+   653→  -------------------------------------------------------------------------------
+   654→
+   655→11.3 Aliran Utama Ibu Bapa
+   656→
+   657→1.  Buka laman web → nampak kotak carian dan ucapan salam.
+   658→
+   659→2.  Taip IC atau nama → tekan "Semak Laporan".
+   660→
+   661→3.  Jika nama mempunyai banyak padanan → pilih dan masukkan IC penuh.
+   662→
+   663→4.  (Jika diaktifkan) Masukkan pengesahan ringkas.
+   664→
+   665→5.  Lihat Laporan Murid: tiga kad status → ketik kad untuk butiran.
+   666→
+   667→6.  Tekan "Cetak/Simpan PDF" jika perlu.
+   668→
+   669→11.4 Kandungan Kad Ringkasan (Contoh)
+   670→
+   671→  --------------------------------------------------------------------------
+   672→  Kad             Paparan                   Penerangan Mudah
+   673→  --------------- ------------------------- --------------------------------
+   674→  Kedatangan      96% (Cemerlang) – ikon    "Anak anda hadir 48 daripada 50
+   675→                  hijau                     hari. 1 hari lewat."
+   676→
+   677→  Sahsiah         Gred B (Baik) – ikon      "Akhlak baik. Perlu tingkatkan
+   678→                  hijau muda                disiplin masa."
+   679→
+   680→  Merit/Demerit   Merit 25 | Demerit 8 |    "Rekod baik. Teruskan usaha."
+   681→                  Tahap: Baik               
+   682→  --------------------------------------------------------------------------
+   683→
+   684→12. Seni Bina Teknikal
+   685→
+   686→12.1 Tindanan Teknologi (Tech Stack)
+   687→
+   688→  ------------------------------------------------------------------------
+   689→  Lapisan           Pilihan                   Sebab
+   690→  ----------------- ------------------------- ----------------------------
+   691→  Rangka kerja UI   React 18 + Vite           Pembangunan pantas,
+   692→                                              ekosistem matang, mudah
+   693→                                              dijana oleh GLM 5.2
+   694→
+   695→  Bahasa            TypeScript (disyorkan)    Kurangkan ralat jenis data
+   696→                    atau JavaScript           
+   697→
+   698→  Penghalaan        React Router v6           Pengurusan laluan portal ibu
+   699→                                              bapa dan panel staf
+   700→
+   701→  Penggayaan        Tailwind CSS (+ komponen  Responsif dan konsisten
+   702→                    shadcn/ui pilihan)        
+   703→
+   704→  Pengurusan        React Context + TanStack  Cache data dan
+   705→  keadaan           Query                     ketidaksegerakan terurus
+   706→
+   707→  Borang dan        React Hook Form + Zod     Pengesahan IC dan input
+   708→  pengesahan                                  borang
+   709→
+   710→  Carta             Recharts                  Carta trend dan bar ringan
+   711→
+   712→  Pangkalan data    Fail JSON + localStorage  Tiada pelayan diperlukan;
+   713→  dummy             melalui lapisan           mudah ditukar kepada API
+   714→                    repository                
+   715→
+   716→  API tiruan        Mock Service Worker (MSW) Simulasi permintaan HTTP
+   717→  (pilihan)         atau json-server          sebenar
+   718→
+   719→  Ujian             Vitest + React Testing    Ujian logik dan aliran
+   720→                    Library; Playwright (E2E) 
+   721→
+   722→  Penghantaran      Vercel / Netlify / GitHub Hosting percuma untuk demo
+   723→  prototaip         Pages                     
+   724→  ------------------------------------------------------------------------
+   725→
+   726→12.2 Seni Bina Berlapis
+   727→
+   728→Aplikasi dipisahkan kepada lapisan supaya pangkalan data dummy boleh
+   729→digantikan dengan pangkalan data sebenar pada masa hadapan tanpa
+   730→mengubah komponen UI:
+   731→
+   732→-   Presentation: halaman dan komponen React.
+   733→
+   734→-   Hooks/Services: useStudentReport, useAttendance, useMerits
+   735→    (menggunakan TanStack Query).
+   736→
+   737→-   Domain logic: fungsi tulen untuk pengiraan kehadiran, gred sahsiah,
+   738→    mata bersih dan tahap disiplin (mudah diuji).
+   739→
+   740→-   Repository: antara muka StudentRepository, AttendanceRepository dan
+   741→    sebagainya; pelaksanaan semasa: LocalJsonRepository.
+   742→
+   743→-   Data: fail JSON benih (seed) dimuat ke localStorage pada lawatan
+   744→    pertama.
+   745→
+   746→12.3 Struktur Folder Cadangan
+   747→
+   748→  src/
+   749→
+   750→  app/ (router, provider, layout)
+   751→
+   752→  features/
+   753→
+   754→  search/ (carian IC/nama)
+   755→
+   756→  report/ (ringkasan laporan)
+   757→
+   758→  attendance/ (komponen, hooks, logik)
+   759→
+   760→  character/ (sahsiah)
+   761→
+   762→  merit/ (merit & demerit)
+   763→
+   764→  staff/ (log masuk, papan pemuka, CRUD)
+   765→
+   766→  data/ (seed JSON: students, attendance, character, merits, users,
+   767→  config)
+   768→
+   769→  lib/ (repository, utils IC, tarikh, pengiraan)
+   770→
+   771→  i18n/ (ms.json, en.json)
+   772→
+   773→  components/ui/ (butang, kad, lencana status)
+   774→
+   775→  tests/
+   776→
+   777→12.4 Peralihan ke Pangkalan Data Sebenar (Fasa Seterusnya)
+   778→
+   779→Disyorkan pelayan API (Node.js/NestJS atau Laravel) dengan PostgreSQL
+   780→atau MySQL, pengesahan JWT bagi staf, penyimpanan kata laluan berhash
+   781→(Argon2/bcrypt), hosting dalam Malaysia (atau pembekal dengan jaminan
+   782→pematuhan PDPA) dan sandaran harian. Lapisan repository dalam React
+   783→hanya perlu ditukar kepada panggilan fetch/axios.
+   784→
+   785→13. Model Data dan Pangkalan Data Dummy
+   786→
+   787→13.1 Jadual dan Medan
+   788→
+   789→students (Murid)
+   790→
+   791→  ------------------------------------------------------------------------
+   792→  Medan              Jenis         Penerangan
+   793→  ------------------ ------------- ---------------------------------------
+   794→  id                 string        Pengenal unik, cth. "S001"
+   795→
+   796→  ic                 string        12 digit tanpa sengkang (disimpan
+   797→                                   ternormal)
+   798→
+   799→  nama               string        Nama penuh (huruf besar)
+   800→
+   801→  jantina            enum          L / P
+   802→
+   803→  kelas              string        Kelas: Tahfiz 1, Tahfiz 2, Tahfiz 3,
+   804→                                   Tahfiz 4 atau Tahfiz 5
+   805→
+   806→  tahun              number        Tahap pengajian (1–6 atau mengikut
+   807→                                   sistem madrasah)
+   808→
+   809→  asrama             boolean       Menetap di asrama atau tidak
+   810→
+   811→  penjaga            object        nama, hubungan, 4 digit akhir IC, no.
+   812→                                   telefon (bertopeng)
+   813→
+   814→  aktif              boolean       Status murid
+   815→  ------------------------------------------------------------------------
+   816→
+   817→attendance (Kedatangan)
+   818→
+   819→  ------------------------------------------------------------------------
+   820→  Medan              Jenis         Penerangan
+   821→  ------------------ ------------- ---------------------------------------
+   822→  id                 string        Pengenal rekod
+   823→
+   824→  studentId          string        Rujukan kepada students.id
+   825→
+   826→  tarikh             date          Format YYYY-MM-DD
+   827→
+   828→  status             enum          HADIR, LEWAT, SAKIT, KEBENARAN,
+   829→                                   TANPA_SEBAB, PULANG_AWAL
+   830→
+   831→  catatan            string        Sebab atau nota ringkas (pilihan)
+   832→
+   833→  direkodOleh        string        Rujukan kepada users.id
+   834→  ------------------------------------------------------------------------
+   835→
+   836→character_assessments (Sahsiah)
+   837→
+   838→  ------------------------------------------------------------------------
+   839→  Medan              Jenis         Penerangan
+   840→  ------------------ ------------- ---------------------------------------
+   841→  id                 string        Pengenal penilaian
+   842→
+   843→  studentId          string        Rujukan murid
+   844→
+   845→  tempoh             string        Cth. "2026-10" atau "Penggal 3 2026"
+   846→
+   847→  akhlak, ibadah,    number (1–5)  Skor lima aspek
+   848→  kebersihan,                      
+   849→  tanggungjawab,                   
+   850→  sosial                           
+   851→
+   852→  catatan            string        Ulasan guru
+   853→
+   854→  status             enum          DRAF, DISAHKAN
+   855→
+   856→  direkodOleh        string        Rujukan pengguna
+   857→  ------------------------------------------------------------------------
+   858→
+   859→merit_categories (Kategori)
+   860→
+   861→  ------------------------------------------------------------------------
+   862→  Medan              Jenis         Penerangan
+   863→  ------------------ ------------- ---------------------------------------
+   864→  id                 string        Cth. "D03"
+   865→
+   866→  jenis              enum          MERIT / DEMERIT
+   867→
+   868→  nama               string        Cth. "Lewat ke kelas"
+   869→
+   870→  tahap              enum          RINGAN, SEDERHANA, BERAT, SANGAT_BERAT
+   871→                                   (demerit sahaja)
+   872→
+   873→  mata               number        Mata lalai
+   874→  ------------------------------------------------------------------------
+   875→
+   876→merit_records (Rekod Merit/Demerit)
+   877→
+   878→  ------------------------------------------------------------------------
+   879→  Medan              Jenis         Penerangan
+   880→  ------------------ ------------- ---------------------------------------
+   881→  id                 string        Pengenal rekod
+   882→
+   883→  studentId          string        Rujukan murid
+   884→
+   885→  categoryId         string        Rujukan kategori
+   886→
+   887→  tarikh             date          Tarikh kejadian
+   888→
+   889→  mata               number        Mata sebenar (boleh diubah dalam julat
+   890→                                   kategori)
+   891→
+   892→  penerangan         string        Penerangan ringkas
+   893→
+   894→  status             enum          MENUNGGU, DILULUSKAN, DIBATALKAN
+   895→
+   896→  tindakan           string        Tindakan susulan (pilihan)
+   897→
+   898→  direkodOleh /      string        Rujukan pengguna
+   899→  diluluskanOleh                   
+   900→  ------------------------------------------------------------------------
+   901→
+   902→users (Staf) dan config
+   903→
+   904→  --------------------------------------------------------------------------------
+   905→  Medan                      Jenis         Penerangan
+   906→  -------------------------- ------------- ---------------------------------------
+   907→  users.id, nama, peranan    string/enum   GURU, HEM, PENTADBIR
+   908→
+   909→  users.username,            string        Dummy sahaja pada Fasa 1; tidak sama
+   910→  passwordHash                             dengan kata laluan sebenar
+   911→
+   912→  config.ambangKehadiran     object        Ambang peratus status kehadiran
+   913→
+   914→  config.ambangDisiplin      object        Ambang demerit bagi lima tahap disiplin
+   915→
+   916→  config.pengesahanIbuBapa   boolean       Hidup/mati pengesahan ringan
+   917→
+   918→  config.hariCuti            array         Senarai tarikh cuti
+   919→  --------------------------------------------------------------------------------
+   920→
+   921→13.2 Keperluan Data Dummy
+   922→
+   923→-   Tepat 60 murid dibahagikan kepada 5 kelas: Tahfiz 1, Tahfiz 2,
+   924→    Tahfiz 3, Tahfiz 4 dan Tahfiz 5 (12 murid setiap kelas), dengan
+   925→    campuran tahun pengajian dan profil disiplin yang berbeza.
+   926→
+   927→-   Kedatangan 3 bulan terakhir bagi setiap murid (kecuali hujung
+   928→    minggu/cuti).
+   929→
+   930→-   Sekurang-kurangnya 2 penilaian sahsiah bagi setiap murid.
+   931→
+   932→-   10–20 kategori merit dan demerit serta 100 rekod rawak.
+   933→
+   934→-   Pelbagai senario ujian: murid cemerlang, murid kritikal, murid tanpa
+   935→    rekod demerit, dua murid dengan nama hampir sama, murid dengan rekod
+   936→    menunggu kelulusan.
+   937→
+   938→-   Semua nama dan IC adalah rekaan; jangan guna data sebenar murid pada
+   939→    fasa prototaip.
+   940→
+   941→14. Spesifikasi API Tiruan (Mock API)
+   942→
+   943→Walaupun menggunakan data dummy, aplikasi hendaklah berkomunikasi
+   944→melalui lapisan yang meniru API sebenar supaya peralihan mudah.
+   945→
+   946→  ----------------------------------------------------------------------------------------
+   947→  Kaedah     Endpoint                             Fungsi                     Akses
+   948→  ---------- ------------------------------------ -------------------------- -------------
+   949→  GET        /api/students/search?q=              Cari mengikut IC/nama      Awam (had
+   950→                                                  (nama → hasil bertopeng)   kadar)
+   951→
+   952→  POST       /api/students/verify                 Sahkan IC + pengesahan     Awam
+   953→                                                  ringan, pulangkan token    
+   954→                                                  sesi pendek                
+   955→
+   956→  GET        /api/students/:id/report?from=&to=   Ringkasan tiga modul       Token ibu
+   957→                                                                             bapa
+   958→
+   959→  GET        /api/students/:id/attendance         Rekod kedatangan           Token ibu
+   960→                                                                             bapa / staf
+   961→
+   962→  GET        /api/students/:id/character          Penilaian sahsiah          Token ibu
+   963→                                                  (disahkan sahaja)          bapa / staf
+   964→
+   965→  GET        /api/students/:id/merits             Rekod merit/demerit        Token ibu
+   966→                                                  (diluluskan sahaja)        bapa / staf
+   967→
+   968→  POST       /api/attendance/bulk                 Rekod kedatangan satu      Guru, HEM
+   969→                                                  kelas                      
+   970→
+   971→  POST       /api/merits                          Tambah rekod merit/demerit Guru, HEM
+   972→
+   973→  PATCH      /api/merits/:id/approve              Luluskan/batalkan rekod    HEM
+   974→
+   975→  POST/PUT   /api/students, /api/config           Urus murid dan tetapan     Pentadbir
+   976→  ----------------------------------------------------------------------------------------
+   977→
+   978→Contoh Respons /report
+   979→
+   980→  {
+   981→
+   982→  "murid": { "id": "S001", "nama": "AHMAD DANIAL BIN HAFIZ", "kelas":
+   983→  "Tahfiz 1" },
+   984→
+   985→  "kedatangan": { "hariSekolah": 50, "hadir": 48, "lewat": 1, "peratus":
+   986→  96, "status": "CEMERLANG" },
+   987→
+   988→  "sahsiah": { "gred": "B", "skor": 4.0, "catatan": "Akhlak baik, perlu
+   989→  tingkatkan disiplin masa." },
+   990→
+   991→  "merit": { "merit": 25, "demerit": 8, "bersih": 17, "tahap": "BAIK" }
+   992→
+   993→  }
+   994→
+   995→15. Privasi, Keselamatan dan Pematuhan PDPA
+   996→
+   997→Sistem ini mengendalikan data peribadi kanak-kanak. Pematuhan Akta
+   998→Perlindungan Data Peribadi 2010 (PDPA) serta dasar dalaman madrasah
+   999→adalah penting, terutamanya apabila beralih daripada data dummy kepada
+  1000→data sebenar.
+  1001→
+  1002→15.1 Risiko Carian IC/Nama Sahaja
+  1003→
+  1004→No. IC kanak-kanak bukan rahsia mutlak dan boleh diketahui orang lain
+  1005→(rakan, saudara, jiran). Jika IC sahaja digunakan tanpa pengesahan,
+  1006→sesiapa yang mengetahui IC atau nama murid boleh melihat rekod disiplin.
+  1007→Untuk fasa prototaip, ini diterima kerana data adalah rekaan. Untuk fasa
+  1008→produksi, pihak madrasah dinasihatkan memilih sekurang-kurangnya salah
+  1009→satu langkah di bawah.
+  1010→
+  1011→  ------------------------------------------------------------------------
+  1012→  Pilihan               Penerangan              Kemudahan    Keselamatan
+  1013→  --------------------- ----------------------- ------------ -------------
+  1014→  A. IC sahaja          Seperti permintaan asal Tertinggi    Terendah
+  1015→
+  1016→  B. IC murid + 4 digit Penjaga yang berdaftar  Tinggi       Sederhana
+  1017→  akhir IC penjaga      sahaja tahu maklumat                 
+  1018→                        kedua                                
+  1019→
+  1020→  C. IC murid + PIN     PIN 6 digit             Sederhana    Tinggi
+  1021→  yang diberi madrasah  dicetak/diberi pada                  
+  1022→                        pendaftaran                          
+  1023→
+  1024→  D. IC murid + OTP ke  Kod sekali guna melalui Sederhana    Tertinggi
+  1025→  no. telefon berdaftar SMS/WhatsApp                         
+  1026→  ------------------------------------------------------------------------
+  1027→
+  1028→Cadangan: Fasa 1 menyokong A dan B melalui tetapan (FR-04, FR-57).
+  1029→Pilihan C atau D disyorkan sebelum melancarkan dengan data sebenar.
+  1030→
+  1031→15.2 Kawalan Keselamatan
+  1032→
+  1033→-   Sambungan HTTPS (TLS) sepenuhnya; pengepala keselamatan (CSP, HSTS,
+  1034→    X-Frame-Options).
+  1035→
+  1036→-   Had kadar carian dan penguncian sementara selepas beberapa cubaan
+  1037→    gagal; CAPTCHA jika perlu.
+  1038→
+  1039→-   Nama sahaja tidak mendedahkan laporan: hasil carian nama memaparkan
+  1040→    IC bertopeng dan memerlukan IC penuh.
+  1041→
+  1042→-   Token sesi ibu bapa pendek (cth. 15 minit) dan terhad kepada satu
+  1043→    murid.
+  1044→
+  1045→-   Kawalan akses berasaskan peranan (RBAC) bagi staf; setiap tindakan
+  1046→    direkod dalam log audit.
+  1047→
+  1048→-   Kata laluan staf berhash (Argon2/bcrypt); pertimbangkan pengesahan
+  1049→    dua faktor bagi HEM/pentadbir.
+  1050→
+  1051→-   Pengesahan dan pembersihan input (Zod di klien, pengesahan semula di
+  1052→    pelayan) untuk mengelak XSS/injection.
+  1053→
+  1054→-   Tiada data peribadi dalam URL atau log analitik; tiada IC penuh
+  1055→    dalam localStorage selepas sesi tamat.
+  1056→
+  1057→-   Paparan kepada ibu bapa hanya menunjukkan data murid berkenaan dan
+  1058→    hanya rekod berstatus diluluskan.
+  1059→
+  1060→15.3 Pematuhan PDPA (Fasa Produksi)
+  1061→
+  1062→-   Notis privasi dalam Bahasa Malaysia (dan Inggeris) menerangkan data
+  1063→    yang dikumpul, tujuan, tempoh simpanan dan hak capaian/pembetulan.
+  1064→
+  1065→-   Persetujuan ibu bapa/penjaga direkod semasa pendaftaran murid.
+  1066→
+  1067→-   Prinsip kurang data (data minimisation): kumpul hanya data yang
+  1068→    perlu.
+  1069→
+  1070→-   Dasar tempoh simpanan dan pelupusan rekod; arkib selamat bagi rekod
+  1071→    tahun lepas.
+  1072→
+  1073→-   Pelantikan pegawai bertanggungjawab data dalaman dan prosedur
+  1074→    pelaporan insiden kebocoran data.
+  1075→
+  1076→-   Nasihat undang-undang hendaklah diperoleh sebelum pelancaran data
+  1077→    sebenar; dokumen ini bukan nasihat undang-undang.
+  1078→
+  1079→16. Pelan Pembangunan dan Fasa
+  1080→
+  1081→  -----------------------------------------------------------------------
+  1082→  Fasa               Tempoh          Hasil Utama
+  1083→                     Dicadangkan     
+  1084→  ------------------ --------------- ------------------------------------
+  1085→  Fasa 0: Penemuan   Minggu 1        Pengesahan PRD, pengesahan peraturan
+  1086→                                     merit/demerit oleh HEM, pengumpulan
+  1087→                                     logo dan identiti visual.
+  1088→
+  1089→  Fasa 1: Prototaip  Minggu 2–5      Portal ibu bapa, tiga modul, panel
+  1090→  (data dummy)                       staf asas, data dummy, ujian
+  1091→                                     dalaman.
+  1092→
+  1093→  Fasa 1b: UAT       Minggu 6        Ujian kebolehgunaan bersama 10 ibu
+  1094→                                     bapa dan 5 guru; senarai
+  1095→                                     penambahbaikan.
+  1096→
+  1097→  Fasa 2: Sistem     Minggu 7–12     Pelayan API, pangkalan data sebenar,
+  1098→  Sebenar                            pengesahan selamat, import data
+  1099→                                     sebenar, pematuhan PDPA.
+  1100→
+  1101→  Fasa 3:            Selepas         Notifikasi WhatsApp/SMS, PWA,
+  1102→  Penambahbaikan     pelancaran      laporan lanjutan, modul hafazan
+  1103→                                     (pilihan).
+  1104→  -----------------------------------------------------------------------
+  1105→
+  1106→16.1 Milestone Fasa 1 (Pecahan Mingguan)
+  1107→
+  1108→  -----------------------------------------------------------------------
+  1109→  Minggu    Tugas
+  1110→  --------- -------------------------------------------------------------
+  1111→  2         Persediaan projek Vite + React + Tailwind, struktur folder,
+  1112→            data seed, lapisan repository, logik domain dan ujian unit.
+  1113→
+  1114→  3         Halaman utama, carian IC/nama, pengesahan, halaman laporan
+  1115→            ringkasan.
+  1116→
+  1117→  4         Butiran Kedatangan, Sahsiah, Merit/Demerit; carta; penerangan
+  1118→            istilah; cetak PDF.
+  1119→
+  1120→  5         Log masuk staf, papan pemuka, input kedatangan pukal, borang
+  1121→            merit/demerit, urus murid/tetapan, kemasan responsif dan
+  1122→            kebolehcapaian.
+  1123→  -----------------------------------------------------------------------
+  1124→
+  1125→17. Strategi Ujian dan Kriteria Penerimaan
+  1126→
+  1127→17.1 Jenis Ujian
+  1128→
+  1129→  -----------------------------------------------------------------------
+  1130→  Jenis                Skop
+  1131→  -------------------- --------------------------------------------------
+  1132→  Ujian unit           Normalisasi IC, pengiraan kehadiran %, gred
+  1133→                       sahsiah, mata bersih, penentuan tahap disiplin,
+  1134→                       topeng IC.
+  1135→
+  1136→  Ujian komponen       Kotak carian, kad status, kalendar kehadiran,
+  1137→                       borang rekod.
+  1138→
+  1139→  Ujian E2E            Aliran ibu bapa dan guru yang utama pada saiz
+  1140→  (Playwright)         skrin telefon dan desktop.
+  1141→
+  1142→  Kebolehcapaian       Imbasan axe/Lighthouse; ujian pembaca skrin asas.
+  1143→
+  1144→  Kebolehgunaan (UAT)  Tugasan sebenar bersama ibu bapa dan guru;
+  1145→                       pemerhatian dan soal selidik.
+  1146→
+  1147→  Keselamatan asas     Cubaan akses laporan tanpa pengesahan, brute-force
+  1148→                       IC, XSS dalam medan catatan.
+  1149→  -----------------------------------------------------------------------
+  1150→
+  1151→17.2 Kriteria Penerimaan Fasa 1
+  1152→
+  1153→-   Semua keperluan berprioriti M berfungsi tanpa ralat kritikal.
+  1154→
+  1155→-   Carian IC dan nama berfungsi untuk semua senario data dummy,
+  1156→    termasuk dua nama yang hampir sama.
+  1157→
+  1158→-   Pengiraan kehadiran, gred sahsiah, mata bersih dan tahap disiplin
+  1159→    tepat mengikut contoh dalam Bahagian 9 (disahkan melalui ujian
+  1160→    unit).
+  1161→
+  1162→-   Aplikasi boleh digunakan pada skrin 360px dan lulus semakan WCAG 2.1
+  1163→    AA asas.
+  1164→
+  1165→-   Sekurang-kurangnya 90% peserta UAT menyiapkan tugasan "cari laporan
+  1166→    anak" tanpa bantuan.
+  1167→
+  1168→-   Rekod menunggu kelulusan tidak kelihatan pada portal ibu bapa.
+  1169→
+  1170→-   Butang "Tetap semula data dummy" memulihkan data asal.
+  1171→
+  1172→18. Risiko dan Mitigasi
+  1173→
+  1174→  ------------------------------------------------------------------------
+  1175→  Risiko                    Kesan       Mitigasi
+  1176→  ------------------------- ----------- ----------------------------------
+  1177→  Pendedahan data           Tinggi      Pengesahan ringan/PIN/OTP; topeng
+  1178→  kanak-kanak melalui                   IC; had kadar; notis privasi.
+  1179→  carian IC sahaja                      
+  1180→
+  1181→  Peraturan merit/demerit   Sederhana   Simpan sebagai konfigurasi; sahkan
+  1182→  belum dimuktamadkan                   dengan HEM pada Fasa 0.
+  1183→
+  1184→  Ibu bapa kurang literasi  Sederhana   UI minimum, bahasa mudah, panduan
+  1185→  digital                               bergambar, sokongan Unit HEM.
+  1186→
+  1187→  Guru enggan/lewat         Tinggi      Borang pantas, latihan ringkas,
+  1188→  memasukkan data                       sasaran masa input kurang 2 minit.
+  1189→
+  1190→  Kod dijana AI mengandungi Sederhana   Semakan kod, ujian unit/E2E,
+  1191→  ralat atau kelemahan                  imbasan kebergantungan, ujian
+  1192→                                        keselamatan asas.
+  1193→
+  1194→  Data dummy tidak mewakili Rendah      Senario ujian pelbagai; kemas kini
+  1195→  kes sebenar                           data seed selepas UAT.
+  1196→
+  1197→  Capaian internet terhad   Sederhana   Bundle kecil, caching,
+  1198→  di kawasan luar bandar                pertimbangkan PWA pada Fasa 3.
+  1199→
+  1200→  Salah tafsir label        Sederhana   Bahasa membina, penerangan
+  1201→  disiplin oleh ibu bapa                istilah, tindakan susulan yang
+  1202→                                        jelas.
+  1203→  ------------------------------------------------------------------------
+  1204→
+  1205→Lampiran A: Prompt Pembangunan untuk z.ai (GLM 5.2)
+  1206→
+  1207→Gunakan prompt berperingkat di bawah dalam z.ai (model GLM 5.2).
+  1208→Jalankan satu peringkat pada satu masa, uji hasilnya, kemudian teruskan.
+  1209→Salin PRD ini sebagai konteks pada permulaan.
+  1210→
+  1211→Prompt 1 – Persediaan dan Seni Bina
+  1212→
+  1213→  Anda ialah jurutera perisian kanan. Bina aplikasi web "Laporan
+  1214→  Disiplin
+  1215→
+  1216→  Murid" untuk Madrasah Tahfiz Al Furqan (Unit HEM) berdasarkan PRD yang
+  1217→  dilampirkan.
+  1218→
+  1219→  Gunakan React 18 + Vite + TypeScript + Tailwind CSS + React Router v6
+  1220→  +
+  1221→
+  1222→  TanStack Query + React Hook Form + Zod + Recharts. Semua teks UI dalam
+  1223→  Bahasa Malaysia.
+  1224→
+  1225→  Wujudkan struktur folder src/app, src/features, src/data, src/lib,
+  1226→  src/i18n,
+  1227→
+  1228→  src/components/ui. Cipta lapisan repository (interface +
+  1229→  LocalJsonRepository) yang
+  1230→
+  1231→  memuat data seed JSON ke localStorage. Tulis fungsi domain tulen
+  1232→  untuk: normalisasi IC,
+  1233→
+  1234→  topeng IC, kadar kehadiran, gred sahsiah, mata bersih dan tahap
+  1235→  disiplin (ambil ambang
+  1236→
+  1237→  daripada config). Sertakan ujian unit Vitest.
+  1238→
+  1239→Prompt 2 – Data Dummy
+  1240→
+  1241→  Jana data seed JSON: 60 murid rekaan dalam 5 kelas (Tahfiz 1 hingga
+  1242→  Tahfiz 5, 12 murid setiap kelas; nama Melayu, IC 12 digit rekaan
+  1243→  format
+  1244→
+  1245→  YYMMDDPBXXXX, kelas, tahun, penjaga), kedatangan 3 bulan terakhir, 2
+  1246→  penilaian
+  1247→
+  1248→  sahsiah setiap murid, 16 kategori merit/demerit, 100 rekod
+  1249→  merit/demerit dan 5
+  1250→
+  1251→  pengguna staf (GURU, HEM, PENTADBIR). Sertakan senario: murid
+  1252→  cemerlang, murid
+  1253→
+  1254→  kritikal, dua murid bernama hampir sama, dan rekod berstatus MENUNGGU.
+  1255→  Tegaskan semua
+  1256→
+  1257→  data adalah rekaan.
+  1258→
+  1259→Prompt 3 – Portal Ibu Bapa
+  1260→
+  1261→  Bina halaman utama (kotak carian IC/nama), hasil carian (IC
+  1262→  bertopeng), pengesahan
+  1263→
+  1264→  ringan (boleh dihidup/matikan melalui config) dan halaman Laporan
+  1265→  Murid dengan tiga
+  1266→
+  1267→  kad status berkod warna + ikon + teks. Bina tiga halaman butiran:
+  1268→  kedatangan (kalendar
+  1269→
+  1270→  bulanan, statistik, carta), sahsiah (lima aspek, gred, catatan,
+  1271→  perbandingan) dan
+  1272→
+  1273→  merit/demerit (mata bersih, tahap, garis masa, penerangan tindakan).
+  1274→  Mobile-first,
+  1275→
+  1276→  fon 16px ke atas, WCAG 2.1 AA, butang cetak PDF. Hanya paparkan rekod
+  1277→  DILULUSKAN.
+  1278→
+  1279→Prompt 4 – Panel Staf
+  1280→
+  1281→  Bina log masuk staf (RBAC), papan pemuka, input kedatangan pukal satu
+  1282→  kelas, borang
+  1283→
+  1284→  pantas tambah merit/demerit, kelulusan demerit berat (HEM), CRUD
+  1285→  murid + import CSV,
+  1286→
+  1287→  urus kategori/ambang/tetapan, log audit dan butang "Tetap semula data
+  1288→  dummy".
+  1289→
+  1290→  Optimumkan untuk telefon. Rekod tidak boleh dipadam; guna pembatalan
+  1291→  dengan sebab.
+  1292→
+  1293→Prompt 5 – Kemasan dan Ujian
+  1294→
+  1295→  Tambah ujian komponen dan E2E (Playwright) untuk aliran ibu bapa dan
+  1296→  guru, semak
+  1297→
+  1298→  kebolehcapaian, optimum prestasi (code-splitting), had kadar carian,
+  1299→  dan sediakan README
+  1300→
+  1301→  dalam Bahasa Malaysia (cara pasang, jalankan, tukar kepada API
+  1302→  sebenar).
+  1303→
+  1304→Lampiran B: Data Sampel Dummy
+  1305→
+  1306→Semua nama dan nombor IC di bawah adalah rekaan sepenuhnya untuk tujuan
+  1307→prototaip.
+  1308→
+  1309→  ----------------------------------------------------------------------------
+  1310→  ID     Nama                 IC (Rekaan)      Kelas          Senario
+  1311→  ------ -------------------- ---------------- -------------- ----------------
+  1312→  S001   AHMAD DANIAL BIN     120514-10-0123   Tahfiz 1       Murid cemerlang;
+  1313→         HAFIZ                                                kehadiran 96%
+  1314→
+  1315→  S002   MUHAMMAD IRFAN BIN   110302-14-0457   Tahfiz 2       Murid biasa;
+  1316→         ZULKIFLI                                             sedikit demerit
+  1317→                                                              ringan
+  1318→
+  1319→  S003   MUHAMMAD IRFAN BIN   110827-10-0789   Tahfiz 2       Nama hampir sama
+  1320→         ZAKARIA                                              dengan S002
+  1321→
+  1322→  S004   AMIRUL HAKIM BIN     100119-01-0235   Tahfiz 3       Tahap Kritikal;
+  1323→         RAZAK                                                kehadiran 78%
+  1324→
+  1325→  S005   NUR AISYAH BINTI     130711-12-0340   Tahfiz 4       Rekod baik;
+  1326→         KAMAL                                                demerit menunggu
+  1327→                                                              kelulusan
+  1328→
+  1329→  S006   SITI KHADIJAH BINTI  120905-08-0662   Tahfiz 5       Tiada demerit;
+  1330→         ROSLI                                                merit tinggi
+  1331→  ----------------------------------------------------------------------------
+  1332→
+  1333→Contoh Rekod (Format JSON)
+  1334→
+  1335→  { "id": "S001", "ic": "120514100123", "nama": "AHMAD DANIAL BIN
+  1336→  HAFIZ",
+  1337→
+  1338→  "jantina": "L", "kelas": "Tahfiz 1", "tahun": 4, "asrama": true,
+  1339→
+  1340→  "penjaga": { "nama": "HAFIZ BIN ABDULLAH", "hubungan": "Bapa",
+  1341→  "icAkhir4": "4521" },
+  1342→
+  1343→  "aktif": true }
+  1344→
+  1345→  { "id": "M014", "studentId": "S004", "categoryId": "D06", "tarikh":
+  1346→  "2026-10-21",
+  1347→
+  1348→  "mata": -10, "penerangan": "Keluar kawasan madrasah tanpa kebenaran",
+  1349→
+  1350→  "status": "DILULUSKAN", "tindakan": "Nasihat dan panggilan penjaga" }
+  1351→
+  1352→Lampiran C: Glosari
+  1353→
+  1354→  -----------------------------------------------------------------------
+  1355→  Istilah            Maksud
+  1356→  ------------------ ----------------------------------------------------
+  1357→  HEM                Hal Ehwal Murid – unit yang menguruskan kebajikan
+  1358→                     dan disiplin murid.
+  1359→
+  1360→  Merit              Mata ganjaran bagi perlakuan baik atau pencapaian.
+  1361→
+  1362→  Demerit            Mata tolak bagi pelanggaran peraturan.
+  1363→
+  1364→  Mata Bersih        Jumlah merit ditolak jumlah demerit.
+  1365→
+  1366→  Sahsiah            Keperibadian dan akhlak murid.
+  1367→
+  1368→  Halaqah            Kumpulan pengajian dan hafazan (dalam sistem ini,
+  1369→                     kelas Tahfiz 1 hingga Tahfiz 5).
+  1370→
+  1371→  IC                 Kad Pengenalan (MyKid/MyKad) – nombor 12 digit.
+  1372→
+  1373→  PRD                Product Requirement Document – dokumen keperluan
+  1374→                     produk.
+  1375→
+  1376→  PDPA               Akta Perlindungan Data Peribadi 2010 (Malaysia).
+  1377→
+  1378→  UAT                User Acceptance Testing – ujian penerimaan oleh
+  1379→                     pengguna sebenar.
+  1380→
+  1381→  RBAC               Role-Based Access Control – kawalan akses berasaskan
+  1382→                     peranan.
+  1383→
+  1384→  PWA                Progressive Web App – aplikasi web yang boleh
+  1385→                     dipasang seperti aplikasi.
+  1386→
+  1387→  MVP                Minimum Viable Product – produk minimum yang boleh
+  1388→                     digunakan.
+  1389→  -----------------------------------------------------------------------
+  1390→

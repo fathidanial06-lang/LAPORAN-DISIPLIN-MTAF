@@ -1,0 +1,131 @@
+// Prisma schema for "Laporan Disiplin Murid" - Madrasah Tahfiz Al Furqan
+// Real backend dummy database (SQLite). All data is rekaan (dummy).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ===== Murid =====
+model Student {
+  id        String   @id // e.g. "S001"
+  ic        String   @unique // 12 digit tanpa sengkang (normalized)
+  nama      String // Nama penuh (huruf besar)
+  jantina   String // "L" | "P"
+  kelas     String // "Tahfiz 1".."Tahfiz 5"
+  tahun     Int
+  asrama   Boolean  @default(false)
+  // Penjaga (embedded as JSON string for SQLite)
+  penjaga   String // JSON: { nama, hubungan, icAkhir4, telefon }
+  fotoUrl   String?
+  aktif     Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  attendance         Attendance[]
+  characterAssessments CharacterAssessment[]
+  meritRecords       MeritRecord[]
+}
+
+// ===== Kedatangan =====
+model Attendance {
+  id          String   @id @default(cuid())
+  studentId   String
+  student     Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  tarikh      String // YYYY-MM-DD (SQLite has no native date type we use here)
+  status      String // HADIR | LEWAT | SAKIT | KEBENARAN | TANPA_SEBAB | PULANG_AWAL
+  catatan     String?
+  direkodOleh String // user id
+  createdAt   DateTime @default(now())
+
+  @@unique([studentId, tarikh])
+}
+
+// ===== Sahsiah =====
+model CharacterAssessment {
+  id        String   @id @default(cuid())
+  studentId String
+  student   Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  tempoh    String // e.g. "2026-10" or "Penggal 3 2026"
+  akhlak    Int // 1-5
+  ibadah    Int
+  kebersihan Int
+  tanggungjawab Int
+  sosial    Int
+  catatan   String?
+  status    String // DRAF | DISAHKAN
+  direkodOleh String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([studentId, tempoh])
+}
+
+// ===== Kategori Merit/Demerit =====
+model MeritCategory {
+  id    String @id // e.g. "M01" / "D03"
+  jenis String // MERIT | DEMERIT
+  nama  String
+  tahap String // RINGAN | SEDERHANA | BERAT | SANGAT_BERAT (demerit only)
+  mata  Int // default points
+  aktif Boolean @default(true)
+
+  records MeritRecord[]
+}
+
+// ===== Rekod Merit/Demerit =====
+model MeritRecord {
+  id            String   @id @default(cuid())
+  studentId     String
+  student       Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  categoryId    String
+  category      MeritCategory @relation(fields: [categoryId], references: [id])
+  tarikh        String // YYYY-MM-DD
+  mata          Int // actual points (signed by type via category)
+  penerangan    String
+  status        String // MENUNGGU | DILULUSKAN | DIBATALKAN
+  tindakan      String?
+  direkodOleh   String
+  diluluskanOleh String?
+  dibatalkanSebab String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+// ===== Staf / Pengguna =====
+model User {
+  id           String   @id // e.g. "U01"
+  nama         String
+  username     String   @unique
+  passwordHash String // dummy plain on Fasa 1
+  peranan      String // GURU | HEM | PENTADBIR
+  aktif        Boolean  @default(true)
+  createdAt    DateTime @default(now())
+}
+
+// ===== Konfigurasi Sistem (single row) =====
+model Config {
+  id                    String @id @default("singleton")
+  ambangKehadiran       String // JSON
+  ambangDisiplin        String // JSON
+  pengesahanIbuBapa     Boolean @default(false)
+  hariCuti              String // JSON array of YYYY-MM-DD
+  penggalAktif          String @default("Penggal 1 2026")
+}
+
+// ===== Log Audit =====
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String
+  userName  String
+  tindakan  String
+  entiti    String
+  entitiId  String?
+  nilaiLama String?
+  nilaiBaru String?
+  createdAt DateTime @default(now())
+}
