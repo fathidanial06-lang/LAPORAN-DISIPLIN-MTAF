@@ -57,6 +57,10 @@ bun install
 ```
 
 ### Pangkalan data
+
+Aplikasi ini menyokong dua pangkalan data: **SQLite** (untuk pembangunan setempat) dan **PostgreSQL** (untuk produksi di Supabase).
+
+#### Pilihan A: SQLite (pembangunan setempat)
 Pangkalan data SQLite dummy (`db/custom.db`) sudah disertakan dengan data rekaan:
 - 60 murid dalam 5 kelas Tahfiz (12 setiap kelas)
 - 3 bulan rekod kedatangan
@@ -65,11 +69,25 @@ Pangkalan data SQLite dummy (`db/custom.db`) sudah disertakan dengan data rekaan
 - ~125 rekod merit/demerit
 - 5 pengguna staf
 
+Tetapkan dalam `.env`:
+```
+DATABASE_URL=file:./db/custom.db
+```
+
 Untuk menjanakan semula data dummy:
 ```bash
 bun run db:push        # sync skema
 bun run prisma/seed.ts # reset + seed data rekaan
 ```
+
+#### Pilihan B: Supabase PostgreSQL (produksi)
+1. **Cipta jadual & seed data:** Buka `supabase_setup.sql` (fail dalam root repo), salin seluruh kandungan, dan jalankan di **Supabase Dashboard → SQL Editor → New Query → Run**.
+2. **Aktifkan Connection Pooler:** Supabase Dashboard → Settings → Database → Connection Pooling → Enable.
+3. **Tetapkan DATABASE_URL** dalam `.env` (gunakan Connection Pooler, Session mode, port 5432):
+```
+DATABASE_URL=postgresql://postgres.{project-ref}:{password}@aws-0-{region}.pooler.supabase.com:5432/postgres
+```
+4. Jalankan aplikasi — Prisma akan terus hubung ke Supabase.
 
 ### Pembangunan
 ```bash

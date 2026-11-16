@@ -1,12 +1,12 @@
 // Prisma schema for "Laporan Disiplin Murid" - Madrasah Tahfiz Al Furqan
-// Real backend dummy database (SQLite). All data is rekaan (dummy).
+// Real backend database on Supabase (PostgreSQL). All data is rekaan (dummy).
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
